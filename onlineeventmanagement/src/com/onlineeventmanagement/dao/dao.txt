@@ -1,7 +1,0 @@
-HI there,
-Clone this repo at a local storage (D: drive )
-Open STS,-> window >> perspective>>open perspective>>other>>git>>clone repo from local storsage(D:);
-
-Happy coding!!
-
-Delete this file once done!!
