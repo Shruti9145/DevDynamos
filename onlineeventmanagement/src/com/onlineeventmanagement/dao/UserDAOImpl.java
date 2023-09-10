@@ -14,8 +14,8 @@ import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.UserNotLoginException;
 
-public class UserDAO {
-
+public class UserDAOImpl implements UserDAO {
+	@Override
 	public boolean userRegistration(User user) throws UserAlreadyExsistException {
 		String url = "jdbc:mysql://localhost/onlineeventmanagement";
 		Connection con = null;
@@ -44,6 +44,7 @@ public class UserDAO {
 	}
 
 	// User Login
+	@Override
 	public boolean userlogin(String userName, String password) throws UserLoginException {
 		String url = "jdbc:mysql://localhost/onlineeventmanagement";
 		Connection con = null;
@@ -81,6 +82,7 @@ public class UserDAO {
 	}
 
 	/* Logout the user and set the Log status to false in DB*/
+	@Override
 	public boolean userLogout(String userName) {
 		// Update user Status to logged out in DB
 		if (updateLogStatus(false, userName)) {
@@ -93,6 +95,7 @@ public class UserDAO {
 	 * method is used to update the log status to true when user login's in
 	 * method is used to update the log status to false when user log's out 
 	 */
+	@Override
 	public boolean updateLogStatus(boolean status, String userName) {
 		String url = "jdbc:mysql://localhost/onlineeventmanagement";
 		Connection con = null;
@@ -123,6 +126,7 @@ public class UserDAO {
 	 * method gets the Login status of the user
 	 * if user is not login all user cannot call any method
 	 */
+	@Override
 	public boolean getUserLoginStatus(String userName) {
 		String url = "jdbc:mysql://localhost/onlineeventmanagement";
 		Connection con = null;
@@ -145,9 +149,17 @@ public class UserDAO {
 		}
 		return status;
 	}
-
+	
+	/*
+	 * Method to get information about user
+	 */
+	@Override
 	public User getInfo(String userName) throws UserNotFoundException, UserNotLoginException {
 		
+		/*
+		 * verify if user is login 
+		 * if not raise user not login exception
+		 * */
 		if(!getUserLoginStatus(userName)) {
 			throw new UserNotLoginException("User need to login first");
 		}
@@ -187,7 +199,14 @@ public class UserDAO {
 
 	}
 
+	/*
+	 * Method to update User Password*/
+	@Override
 	public boolean updatePassword(String userName, String newPassword) throws UserNotFoundException, UserNotLoginException {
+		/*
+		 * verify if user is login 
+		 * if not raise user not login exception
+		 * */
 		if(!getUserLoginStatus(userName)) {
 			throw new UserNotLoginException("User need to login first");
 		}

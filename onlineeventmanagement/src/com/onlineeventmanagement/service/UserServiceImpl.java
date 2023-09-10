@@ -1,6 +1,6 @@
 package com.onlineeventmanagement.service;
 
-import com.onlineeventmanagement.dao.UserDAO;
+import com.onlineeventmanagement.dao.UserDAOImpl;
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserLoginException;
@@ -8,7 +8,7 @@ import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.UserNotLoginException;
 
 public class UserServiceImpl implements UserService {
-	UserDAO userDAO = new UserDAO();
+	UserDAOImpl userDAO = new UserDAOImpl();
 
 	@Override
 	public boolean registerUser(User user) throws UserAlreadyExsistException   {
