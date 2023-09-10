@@ -1,11 +1,8 @@
 package com.onlineeventmanagement.controller;
 
-import java.sql.SQLException;
+import java.time.LocalDate;
 
 import com.onlineeventmanagement.domain.User;
-import com.onlineeventmanagement.exception.UserNotFoundException;
-import com.onlineeventmanagement.service.UserService;
-import com.onlineeventmanagement.service.UserServiceImpl;
 import com.onlineeventmanagement.ui.UserUI;
 import com.onlineeventmanagement.ui.UserUIImpl;
 
@@ -13,9 +10,17 @@ public class Main {
     public static void main(String[] args) {
     	
         UserUI ui = new UserUIImpl();
+
+        User user = new User("Shubhayu26", "Shubhayu" , "Password@Shubh", null, "9594046574", "shu@email.com", "Pune");
         
+//        ui.registration(user);
+        
+        ui.login("Shubhayu26", "Password@123");
+        ui.updatePassword("Shubhayu26", "Password@123");
+        ui.showDetails("Shubhayu26");
+        ui.logout("Shubhayu26");
        
-        ui.showDetails("123");
-        ui.updatePassword("12","Pass_123");
+      
+        
     }
 }

@@ -1,30 +1,65 @@
 package com.onlineeventmanagement.service;
 
-import java.sql.SQLException;
-
 import com.onlineeventmanagement.dao.UserDAO;
 import com.onlineeventmanagement.domain.User;
+import com.onlineeventmanagement.exception.UserAlreadyExsistException;
+import com.onlineeventmanagement.exception.UserLoginException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
+import com.onlineeventmanagement.exception.UserNotLoginException;
 
 public class UserServiceImpl implements UserService {
 	UserDAO userDAO = new UserDAO();
 
 	@Override
-	public User viewProfile(String userId) throws UserNotFoundException {
-		User user;
-		user = userDAO.getInfo(userId);
-		if (user.getUserId() == null) {
-			throw new UserNotFoundException("UserID Invalid");
-		} else {
-			return user;
+	public boolean registerUser(User user) throws UserAlreadyExsistException   {
+		boolean result;
+		try {
+			result = userDAO.userRegistration(user);
+			return result;
+		} catch (UserAlreadyExsistException e) {
+			throw new UserAlreadyExsistException("Service: User Already exsists");
 		}
+		
+	}
+
+	@Override
+	public boolean userLogin(String userName, String password) throws UserLoginException {
+		boolean result;
+		try {
+			result = userDAO.userlogin(userName, password);
+		} catch (UserLoginException e) {
+			// TODO Auto-generated catch block
+			throw new UserLoginException("Invalid Username or Password");
+		}
+		return result;
+	}
+
+	@Override
+	public boolean userLogout(String userName) {
+		boolean result = userDAO.userLogout(userName);
+		return result;
+	}
+
+	@Override
+	public User viewProfile(String userName) throws UserNotFoundException, UserNotLoginException {
+		User user;
+		try {
+			user = userDAO.getInfo(userName);
+			
+		} catch (UserNotFoundException e) {
+			throw new UserNotFoundException("Invalid user name");
+		}
+		return user;
+	
+		
 
 	}
 
 	@Override
-	public boolean updatePassword(String userId, String newPassword) throws UserNotFoundException {
+	public boolean updatePassword(String userName, String newPassword) throws UserNotFoundException, UserNotLoginException {
 
-		boolean result = userDAO.updatePassword(userId, newPassword);
+		boolean result = userDAO.updatePassword(userName, newPassword);
+		
 		return result;
 
 	}
