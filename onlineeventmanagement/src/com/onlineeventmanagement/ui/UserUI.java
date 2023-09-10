@@ -8,11 +8,17 @@ public interface UserUI {
 	
 	public void login(String userName, String password);
 	
-	public void logout(String userName);
+	public void logout(User user);
 	
-    public void showDetails(String userID);
+    public void showDetails(User user);
     
-    public void updatePassword(String userName, String password);
+    public void updatePassword(User user, String password);
+
+	public void updateEmail(User user, String email);
+
+	public void updatePhoneNumber(User user, String phoneNumber);
+
+	public void updateAddress(User user, String address);
 
 	
     

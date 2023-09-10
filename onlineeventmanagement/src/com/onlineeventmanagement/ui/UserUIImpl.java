@@ -48,8 +48,8 @@ public class UserUIImpl implements UserUI {
 	}
 
 	@Override
-	public void logout(String userName) {
-		boolean result = userService.userLogout(userName);
+	public void logout(User user) {
+		boolean result = userService.userLogout(user.getUserName());
 		if(result) {
 			System.out.println("User Log out Successfull");
 		}else {
@@ -60,11 +60,11 @@ public class UserUIImpl implements UserUI {
 	
 	
 	@Override
-	public void showDetails(String userName) {
+	public void showDetails(User user) {
 		
 		 try {
-			User user = userService.viewProfile(userName);
-			System.out.println(user);
+			User userData = userService.viewProfile(user.getUserName());
+			System.out.println(userData);
 		} catch (UserNotFoundException e) {
 			e.printStackTrace();
 		} catch (UserNotLoginException e) {
@@ -75,9 +75,9 @@ public class UserUIImpl implements UserUI {
 	}
 
 	@Override
-	public void updatePassword(String userName, String newPassword) {
+	public void updatePassword(User user, String newPassword) {
 		try {
-			boolean result = userService.updatePassword(userName, newPassword);
+			boolean result = userService.updatePassword(user.getUserName(), newPassword);
 			
 			if(result) {
 				System.out.println("Password Updated Successfully");
@@ -93,6 +93,53 @@ public class UserUIImpl implements UserUI {
 		}
 
 	}
+
+	@Override
+	public void updateEmail(User user,String email) {
+		try {
+			boolean result = userService.updateEmail(user,email);
+			if(result) {
+				System.out.println("Email Updated Successfully");
+			}
+		}catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UserNotLoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void updatePhoneNumber(User user, String phoneNumber) {
+		try {
+			userService.updatePhoneNumber(user,phoneNumber);
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UserNotLoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void updateAddress(User user, String address) {
+		try {
+			userService.updateAddress(user,address);
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UserNotLoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 
 	
 

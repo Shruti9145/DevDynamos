@@ -11,9 +11,12 @@ public class LoggerUtility {
 
     static {
         try {
-            FileHandler fileHandler = new FileHandler("logFile.log");
+            FileHandler fileHandler = new FileHandler("logFile.log",true);
             fileHandler.setFormatter(new SimpleFormatter());
             logger.addHandler(fileHandler);
+            
+            Logger rootLogger = Logger.getLogger("");
+            rootLogger.removeHandler(rootLogger.getHandlers()[0]);
         } catch (IOException e) {
             e.printStackTrace();
         }

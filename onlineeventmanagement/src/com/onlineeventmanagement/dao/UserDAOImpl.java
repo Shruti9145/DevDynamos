@@ -13,8 +13,10 @@ import com.onlineeventmanagement.exception.UserLoginException;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.UserNotLoginException;
+import com.onlineeventmanagement.logger.LoggerUtility;
 
 public class UserDAOImpl implements UserDAO {
+	
 	@Override
 	public boolean userRegistration(User user) throws UserAlreadyExsistException {
 		String url = "jdbc:mysql://localhost/onlineeventmanagement";
@@ -38,6 +40,7 @@ public class UserDAOImpl implements UserDAO {
 			return true;
 
 		} catch (SQLException e) {
+			
 			throw new UserAlreadyExsistException(" DAO:User Already Exsists");
 		}
 
@@ -235,4 +238,104 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
+	public boolean updateEmail(User user, String email) throws UserNotFoundException, UserNotLoginException {
+		/*
+		 * verify if user is login 
+		 * if not raise user not login exception
+		 * */
+		if(!getUserLoginStatus(user.getUserName())) {
+			throw new UserNotLoginException("User need to login first");
+		}
+		String url = "jdbc:mysql://localhost/onlineeventmanagement";
+		Connection con = null;
+		PreparedStatement stmt = null;
+
+		try {
+			con = DriverManager.getConnection(url, "root", "root");
+			String query = "update users set email = ? where userName = ? ";
+			// PreparedSatement to execute Query
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, email);
+			stmt.setString(2, user.getUserName());
+			int rowsAffected = stmt.executeUpdate();
+			if (rowsAffected > 0) {
+				return true;
+			} else {
+				throw new UserNotFoundException("Invalid User ID . Not able to change Password");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new UserNotFoundException(" Invalid User ID. Not able to change Password");
+		}
+		
+	}
+
+	public boolean updatePhoneNumber(User user, String mobileNumber) throws UserNotFoundException, UserNotLoginException {
+		/*
+		 * verify if user is login 
+		 * if not raise user not login exception
+		 * */
+		if(!getUserLoginStatus(user.getUserName())) {
+			throw new UserNotLoginException("User need to login first");
+		}
+		String url = "jdbc:mysql://localhost/onlineeventmanagement";
+		Connection con = null;
+		PreparedStatement stmt = null;
+
+		try {
+			con = DriverManager.getConnection(url, "root", "root");
+			String query = "update users set email = ? where userName = ? ";
+			// PreparedSatement to execute Query
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, mobileNumber);
+			stmt.setString(2, user.getUserName());
+			int rowsAffected = stmt.executeUpdate();
+			if (rowsAffected > 0) {
+				return true;
+			} else {
+				throw new UserNotFoundException("Invalid User ID . Not able to change Password");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new UserNotFoundException(" Invalid User ID. Not able to change Password");
+		}
+	}
+
+	public boolean updateAddress(User user, String location) throws UserNotFoundException, UserNotLoginException {
+		/*
+		 * verify if user is login 
+		 * if not raise user not login exception
+		 * */
+		if(!getUserLoginStatus(user.getUserName())) {
+			throw new UserNotLoginException("User need to login first");
+		}
+		String url = "jdbc:mysql://localhost/onlineeventmanagement";
+		Connection con = null;
+		PreparedStatement stmt = null;
+
+		try {
+			con = DriverManager.getConnection(url, "root", "root");
+			String query = "update users set email = ? where userName = ? ";
+			// PreparedSatement to execute Query
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, location);
+			stmt.setString(2, user.getUserName());
+			int rowsAffected = stmt.executeUpdate();
+			if (rowsAffected > 0) {
+				return true;
+			} else {
+				throw new UserNotFoundException("Invalid User ID . Not able to change Password");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new UserNotFoundException(" Invalid User ID. Not able to change Password");
+		}
+	}
+	
+	
+
+	
 }

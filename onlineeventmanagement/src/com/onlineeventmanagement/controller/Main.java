@@ -16,9 +16,13 @@ public class Main {
 //        ui.registration(user);
         
         ui.login("Shubhayu26", "Password@123");
-        ui.updatePassword("Shubhayu26", "Password@123");
-        ui.showDetails("Shubhayu26");
-        ui.logout("Shubhayu26");
+//        
+//        ui.updatePassword(user, "Password@123");
+//        ui.showDetails(user);
+        ui.updateEmail(user,"shubhayu@gmail.com");
+        ui.updatePhoneNumber(user,"9598654789");
+        ui.updateAddress(user,"Mumbai");
+        ui.logout(user);
        
       
         

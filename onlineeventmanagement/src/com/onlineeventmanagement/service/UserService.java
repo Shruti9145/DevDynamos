@@ -21,14 +21,10 @@ public interface UserService {
     public boolean updatePassword(String userName,String newPassword) throws UserNotFoundException, UserNotLoginException;
 
     /*User can Update the location in DB */
-    public User updateAddress(String location);
+    public boolean updateAddress(User user, String location) throws UserNotFoundException, UserNotLoginException;
    
     /*User can update Phone Number in DB */
-    public User updatePhoneNumber(String mobileNumber);
-
-    /*User can update Email in DB */
-    public User updateEmail(String email);
-
+    public boolean updatePhoneNumber(User user, String mobileNumber) throws UserNotFoundException, UserNotLoginException;
 
     /*
      * Method viewPackage will get the package details from Package table in DB.
@@ -49,6 +45,8 @@ public interface UserService {
      * User sets the quatation to accept or reject.
      */
     // public boolean setQuatationStatus(Quatation quatation);
+
+	boolean updateEmail(User user, String email) throws UserNotFoundException, UserNotLoginException;
 
 	
 

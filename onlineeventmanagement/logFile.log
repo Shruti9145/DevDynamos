@@ -1,0 +1,39 @@
+Sep 10, 2023 4:00:19 PM com.onlineeventmanagement.logger.LoggerUtility logError
+SEVERE:  Duplicate entry 'Shubhayu26' for key 'users.userName'
+java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'Shubhayu26' for key 'users.userName'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at com.onlineeventmanagement.dao.UserDAOImpl.userRegistration(UserDAOImpl.java:39)
+	at com.onlineeventmanagement.service.UserServiceImpl.registerUser(UserServiceImpl.java:18)
+	at com.onlineeventmanagement.ui.UserUIImpl.registration(UserUIImpl.java:18)
+	at com.onlineeventmanagement.controller.Main.main(Main.java:16)
+
+Sep 10, 2023 4:00:52 PM com.onlineeventmanagement.logger.LoggerUtility logError
+SEVERE:   DAO:User Already Exsists
+com.onlineeventmanagement.exception.UserAlreadyExsistException:  DAO:User Already Exsists
+	at com.onlineeventmanagement.dao.UserDAOImpl.userRegistration(UserDAOImpl.java:44)
+	at com.onlineeventmanagement.service.UserServiceImpl.registerUser(UserServiceImpl.java:18)
+	at com.onlineeventmanagement.ui.UserUIImpl.registration(UserUIImpl.java:18)
+	at com.onlineeventmanagement.controller.Main.main(Main.java:16)
+
+Sep 10, 2023 4:21:29 PM com.onlineeventmanagement.logger.LoggerUtility logError
+SEVERE:   DAO:User Already Exsists
+com.onlineeventmanagement.exception.UserAlreadyExsistException:  DAO:User Already Exsists
+	at com.onlineeventmanagement.dao.UserDAOImpl.userRegistration(UserDAOImpl.java:44)
+	at com.onlineeventmanagement.service.UserServiceImpl.registerUser(UserServiceImpl.java:18)
+	at com.onlineeventmanagement.ui.UserUIImpl.registration(UserUIImpl.java:18)
+	at com.onlineeventmanagement.controller.Main.main(Main.java:16)
+
+Sep 10, 2023 4:36:28 PM com.onlineeventmanagement.logger.LoggerUtility logError
+SEVERE:   DAO:User Already Exsists
+com.onlineeventmanagement.exception.UserAlreadyExsistException:  DAO:User Already Exsists
+	at com.onlineeventmanagement.dao.UserDAOImpl.userRegistration(UserDAOImpl.java:44)
+	at com.onlineeventmanagement.service.UserServiceImpl.registerUser(UserServiceImpl.java:18)
+	at com.onlineeventmanagement.ui.UserUIImpl.registration(UserUIImpl.java:18)
+	at com.onlineeventmanagement.controller.Main.main(Main.java:16)
+
