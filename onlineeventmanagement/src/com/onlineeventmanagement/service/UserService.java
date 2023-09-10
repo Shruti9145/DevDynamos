@@ -1,16 +1,24 @@
 package com.onlineeventmanagement.service;
 
-import java.sql.SQLException;
-
 import com.onlineeventmanagement.domain.User;
+import com.onlineeventmanagement.exception.UserLoginException;
+import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
+import com.onlineeventmanagement.exception.UserNotLoginException;
 
 public interface UserService {
+	
+	public boolean registerUser(User user) throws UserAlreadyExsistException;
+	
+	public boolean userLogin(String userName,String password) throws UserLoginException;
+	
+	public boolean userLogout(String userName);
+	
     /*User will get all the details from DB */
-    public User viewProfile(String userId) throws UserNotFoundException;
+    public User viewProfile(String userId) throws UserNotFoundException, UserNotLoginException;
     
     /*User can Change Password*/
-    public boolean updatePassword(String userId,String newPassword) throws UserNotFoundException;
+    public boolean updatePassword(String userName,String newPassword) throws UserNotFoundException, UserNotLoginException;
 
     /*User can Update the location in DB */
     public User updateAddress(String location);
@@ -41,6 +49,8 @@ public interface UserService {
      * User sets the quatation to accept or reject.
      */
     // public boolean setQuatationStatus(Quatation quatation);
+
+	
 
 
     
