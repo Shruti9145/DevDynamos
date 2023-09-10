@@ -115,10 +115,10 @@ public class AdminDAOImpl implements AdminDAO{
             user.setDateOfBirth(newDate);
             user.setEmail(rs.getString("email"));
             user.setLocation(rs.getString("location"));
-            user.setMobileNumber(rs.getString("mobilenumber"));
+            user.setMobileNumber(rs.getString("mobileNumber"));
             user.setPassword(rs.getString("password"));
-            user.setUserId(rs.getString("userid"));
-            user.setUserName(rs.getString("username"));
+            user.setUserId(rs.getString("userId"));
+            user.setUserName(rs.getString("userName"));
             users.add(user);
         }
 
