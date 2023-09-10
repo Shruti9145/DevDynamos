@@ -8,10 +8,10 @@ public class Vendor {
 	private String id;
 	private String address;
 	private String email;
-	private double contactNo;
+	private String contactNo;
 	private Set<Package> eventPackage;
 	
-	public Vendor(String name, String id, String address, String email, double contactNo, Set<Package> eventPackage) {
+	public Vendor(String name, String id, String address, String email, String contactNo, Set<Package> eventPackage) {
 		
 		this.name = name;
 		this.id = id;
@@ -44,10 +44,10 @@ public class Vendor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public double getContactNo() {
+	public String getContactNo() {
 		return contactNo;
 	}
-	public void setContactNo(double contactNo) {
+	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
 	public Set<Package> getEventPackage() {
