@@ -186,9 +186,10 @@ public class UserDAOImpl implements UserDAO {
 				user.setMobileNumber(res.getString("mobileNumber"));
 				user.setEmail(res.getString("email"));
 				user.setLocation(res.getString("location"));
-				// Date dateOfBirthSql = res.getDate("dateOfBirth");
-				// LocalDate dateOfBirthLocalDate = dateOfBirthSql.();
-				// user.setDateOfBirth(dateOfBirthLocalDate);
+				Date dateOfBirthSql = res.getDate("dateOfBirth");
+				Date utilDate = new Date(dateOfBirthSql.getTime());
+				LocalDate newDate = utilDate.toLocalDate(); 
+				user.setDateOfBirth(newDate);
 			}
 			stmt.close();
 			con.close();
