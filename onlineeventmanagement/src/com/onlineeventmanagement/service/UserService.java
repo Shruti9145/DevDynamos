@@ -2,6 +2,7 @@ package com.onlineeventmanagement.service;
 
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserLoginException;
+import com.onlineeventmanagement.exception.UserNotActiveException;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.UserNotLoginException;
@@ -10,7 +11,7 @@ public interface UserService {
 	
 	public boolean registerUser(User user) throws UserAlreadyExsistException;
 	
-	public boolean userLogin(String userName,String password) throws UserLoginException;
+	public boolean userLogin(String userName,String password) throws UserLoginException, UserNotActiveException;
 	
 	public boolean userLogout(String userName);
 	
@@ -34,6 +35,7 @@ public interface UserService {
 
     /*User will Select the package */
     public String selectPackage(String packageName);
+    
     /*
      * createPlanRequest will take object of PlanRequest class.
      * It uses setters of PlanRequest class to generate a plan request which will be stored in PlanRequest table in DB

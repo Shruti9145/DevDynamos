@@ -4,6 +4,7 @@ import com.onlineeventmanagement.dao.UserDAOImpl;
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserLoginException;
+import com.onlineeventmanagement.exception.UserNotActiveException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.UserNotLoginException;
 import com.onlineeventmanagement.logger.LoggerUtility;
@@ -20,19 +21,20 @@ public class UserServiceImpl implements UserService {
 		} catch (UserAlreadyExsistException e) {
 			LoggerUtility.logError(" " + e.getMessage(),e);
 			throw new UserAlreadyExsistException("Service: User Already exsists");
-			
 		}
-		
 	}
 
 	@Override
-	public boolean userLogin(String userName, String password) throws UserLoginException {
+	public boolean userLogin(String userName, String password) throws UserLoginException, UserNotActiveException {
 		boolean result;
 		try {
 			result = userDAO.userlogin(userName, password);
 		} catch (UserLoginException e) {
 			// TODO Auto-generated catch block
 			throw new UserLoginException("Invalid Username or Password");
+		} catch (UserNotActiveException e) {
+			throw new UserNotActiveException("User is not Activated by Admin");
+			
 		}
 		return result;
 	}
@@ -53,9 +55,6 @@ public class UserServiceImpl implements UserService {
 			throw new UserNotFoundException("Invalid user name");
 		}
 		return user;
-	
-		
-
 	}
 
 	@Override
@@ -64,7 +63,6 @@ public class UserServiceImpl implements UserService {
 		boolean result = userDAO.updatePassword(userName, newPassword);
 		
 		return result;
-
 	}
 	
 	@Override
@@ -77,7 +75,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean updateAddress(User user,String location) throws UserNotFoundException, UserNotLoginException {
-		 boolean result = userDAO.updateAddress(user,location);
+		boolean result = userDAO.updateAddress(user,location);
 		return result;
 	}
 
@@ -85,10 +83,7 @@ public class UserServiceImpl implements UserService {
 	public boolean updatePhoneNumber(User user,String mobileNumber) throws UserNotFoundException, UserNotLoginException {
 		boolean result = userDAO.updatePhoneNumber(user,mobileNumber);
 		return result;
-		
 	}
-
-	
 
 	@Override
 	public void viewPackage() {
@@ -99,7 +94,7 @@ public class UserServiceImpl implements UserService {
 	public String selectPackage(String packageName) {
 		throw new UnsupportedOperationException("Unimplemented method 'selectPackage'");
 	}
-
+	
 	
 
 	

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserLoginException;
+import com.onlineeventmanagement.exception.UserNotActiveException;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.UserNotLoginException;
@@ -35,7 +36,7 @@ public class UserDAOImpl implements UserDAO {
 			stmt.setString(5, user.getMobileNumber());
 			stmt.setString(6, user.getEmail());
 			stmt.setString(7, user.getLocation());
-
+			
 			stmt.executeUpdate();
 			return true;
 
@@ -48,7 +49,10 @@ public class UserDAOImpl implements UserDAO {
 
 	// User Login
 	@Override
-	public boolean userlogin(String userName, String password) throws UserLoginException {
+	public boolean userlogin(String userName, String password) throws UserLoginException, UserNotActiveException {
+		if(!getLoginStatus(userName)) {
+			throw new UserNotActiveException("User is not Activated");
+		}
 		String url = "jdbc:mysql://localhost/onlineeventmanagement";
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -100,6 +104,7 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public boolean updateLogStatus(boolean status, String userName) {
+		
 		String url = "jdbc:mysql://localhost/onlineeventmanagement";
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -123,6 +128,29 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return false;
 
+	}
+	@Override
+	public boolean getLoginStatus(String userName) {
+		String url = "jdbc:mysql://localhost/onlineeventmanagement";
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet res = null;
+		boolean status = false;
+		try {
+			con = DriverManager.getConnection(url, "root", "root");
+			String query = "select status from users where userName = ?";
+			// PreparedSatement to execute Query
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, userName);
+			res = stmt.executeQuery();
+			
+			while (res.next()) {
+				status = res.getBoolean("status");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return status;
 	}
 
 	/*
@@ -153,6 +181,8 @@ public class UserDAOImpl implements UserDAO {
 		return status;
 	}
 	
+	
+	
 	/*
 	 * Method to get information about user
 	 */
@@ -162,7 +192,8 @@ public class UserDAOImpl implements UserDAO {
 		/*
 		 * verify if user is login 
 		 * if not raise user not login exception
-		 * */
+		 * 
+		 */
 		if(!getUserLoginStatus(userName)) {
 			throw new UserNotLoginException("User need to login first");
 		}
@@ -174,7 +205,7 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			con = DriverManager.getConnection(url, "root", "root");
-			String query = "select * from users where  userName = ?";
+			String query = "select * from users where userName = ?";
 			// PreparedSatement to execute Query
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, userName);
@@ -335,6 +366,8 @@ public class UserDAOImpl implements UserDAO {
 			throw new UserNotFoundException(" Invalid User ID. Not able to change Password");
 		}
 	}
+
+	
 	
 	
 
