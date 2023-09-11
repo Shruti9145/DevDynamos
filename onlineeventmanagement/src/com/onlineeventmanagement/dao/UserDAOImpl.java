@@ -14,7 +14,6 @@ import com.onlineeventmanagement.exception.UserNotActiveException;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.UserNotLoginException;
-import com.onlineeventmanagement.logger.LoggerUtility;
 
 public class UserDAOImpl implements UserDAO {
 	

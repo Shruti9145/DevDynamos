@@ -7,7 +7,6 @@ import com.onlineeventmanagement.exception.UserLoginException;
 import com.onlineeventmanagement.exception.UserNotActiveException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.UserNotLoginException;
-import com.onlineeventmanagement.logger.LoggerUtility;
 
 public class UserServiceImpl implements UserService {
 	UserDAOImpl userDAO = new UserDAOImpl();
@@ -19,7 +18,7 @@ public class UserServiceImpl implements UserService {
 			result = userDAO.userRegistration(user);
 			return result;
 		} catch (UserAlreadyExsistException e) {
-			LoggerUtility.logError(" " + e.getMessage(),e);
+			
 			throw new UserAlreadyExsistException("Service: User Already exsists");
 		}
 	}
