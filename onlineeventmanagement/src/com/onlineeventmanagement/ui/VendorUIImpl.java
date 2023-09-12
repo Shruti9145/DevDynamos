@@ -1,28 +1,36 @@
 package com.onlineeventmanagement.ui;
 
+import com.onlineeventmanagement.domain.Vendor;
+import com.onlineeventmanagement.exception.UserRequestNotFoundException;
+import com.onlineeventmanagement.exception.VendorNotFoundException;
 import com.onlineeventmanagement.service.VendorService;
 import com.onlineeventmanagement.service.VendorServiceImpl;
 
 public class VendorUIImpl implements VendorUI{
 
-	VendorService vs = new VendorServiceImpl();
+	VendorService vendorService = new VendorServiceImpl();
 	@Override
 	public void addPackage() {
 		// TODO Auto-generated method stub
-		vs.createPackage();
+		vendorService.createPackage();
+
 		
 	}
 
 	@Override
 	public void showUserRequest() {
-		// TODO Auto-generated method stub
-		vs.viewUserRequest();
+		try {
+			vendorService.viewUserRequest();
+		}
+		catch(UserRequestNotFoundException e) {
+			e.getMessage();
+		}
 		
 	}
 	
 	@Override
 	public void addQuoatation() {
-		vs.createQuotation();
+		vendorService.createQuotation();
 		
 	}
 

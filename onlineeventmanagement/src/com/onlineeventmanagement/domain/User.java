@@ -21,8 +21,7 @@ public class User {
 	 * Parameterized constructor for all properties except the status property. User
 	 * status will be provided by Admin.
 	 */
-	public User(String userName, String name, String password, LocalDate dateOfBirth, String mobileNumber, String email,
-			String location) {
+	public User(String userName, String name, String password, LocalDate dateOfBirth, String mobileNumber, String email,String location) {
 		this.userName = userName;
 		this.name = name;
 		this.password = password;

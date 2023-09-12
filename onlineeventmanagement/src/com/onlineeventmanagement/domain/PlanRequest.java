@@ -11,11 +11,11 @@ public class PlanRequest {
 	private Set<String> services;
 	private int numberPeople;
 	private Set<String> otherServices;
-	private Package packageName;
+	private PackageObj packageName;
 	private User user;
 	
 	public PlanRequest(int id, LocalDate fromDate, LocalDate toDate, Set<String> services, int numberPeople,
-			Set<String> otherServices, Package packageName, User user) {
+			Set<String> otherServices, PackageObj packageName, User user) {
 		this.id = id;
 		this.fromDate = fromDate;
 		this.toDate = toDate;
@@ -68,10 +68,10 @@ public class PlanRequest {
 		this.otherServices = otherServices;
 	}
 	
-	public Package getPackageName() {
+	public PackageObj getPackageName() {
 		return packageName;
 	}
-	public void setPackageName(Package packageName) {
+	public void setPackageName(PackageObj packageName) {
 		this.packageName = packageName;
 	}
 	
