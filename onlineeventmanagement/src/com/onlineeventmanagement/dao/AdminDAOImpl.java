@@ -158,11 +158,11 @@ public class AdminDAOImpl implements AdminDAO{
                 return true;
             }
 
-        }else {
-            throw new UserNotFoundException("Given User Not Found!!");
+		} else{
+			 throw new UserNotFoundException("Given User Not Found!!");
         }
-           
-        return false;
+		return false;
+    	
     }
 
     @Override

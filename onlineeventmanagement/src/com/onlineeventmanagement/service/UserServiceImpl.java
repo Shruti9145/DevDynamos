@@ -4,6 +4,7 @@ import com.onlineeventmanagement.dao.UserDAOImpl;
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserLoginException;
+import com.onlineeventmanagement.exception.UserNotActiveException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.UserNotLoginException;
 
@@ -17,19 +18,22 @@ public class UserServiceImpl implements UserService {
 			result = userDAO.userRegistration(user);
 			return result;
 		} catch (UserAlreadyExsistException e) {
+			
 			throw new UserAlreadyExsistException("Service: User Already exsists");
 		}
-		
 	}
 
 	@Override
-	public boolean userLogin(String userName, String password) throws UserLoginException {
+	public boolean userLogin(String userName, String password) throws UserLoginException, UserNotActiveException {
 		boolean result;
 		try {
 			result = userDAO.userlogin(userName, password);
 		} catch (UserLoginException e) {
 			// TODO Auto-generated catch block
 			throw new UserLoginException("Invalid Username or Password");
+		} catch (UserNotActiveException e) {
+			throw new UserNotActiveException("User is not Activated by Admin");
+			
 		}
 		return result;
 	}
@@ -50,9 +54,6 @@ public class UserServiceImpl implements UserService {
 			throw new UserNotFoundException("Invalid user name");
 		}
 		return user;
-	
-		
-
 	}
 
 	@Override
@@ -61,22 +62,26 @@ public class UserServiceImpl implements UserService {
 		boolean result = userDAO.updatePassword(userName, newPassword);
 		
 		return result;
-
+	}
+	
+	@Override
+	public boolean updateEmail(User user, String email) throws UserNotFoundException, UserNotLoginException {
+		
+		boolean result = userDAO.updateEmail(user, email);
+		
+		return result;
 	}
 
 	@Override
-	public User updateAddress(String location) {
-		throw new UnsupportedOperationException("Unimplemented method 'updateAddress'");
+	public boolean updateAddress(User user,String location) throws UserNotFoundException, UserNotLoginException {
+		boolean result = userDAO.updateAddress(user,location);
+		return result;
 	}
 
 	@Override
-	public User updatePhoneNumber(String mobileNumber) {
-		throw new UnsupportedOperationException("Unimplemented method 'updatePhoneNumber'");
-	}
-
-	@Override
-	public User updateEmail(String email) {
-		throw new UnsupportedOperationException("Unimplemented method 'updateEmail'");
+	public boolean updatePhoneNumber(User user,String mobileNumber) throws UserNotFoundException, UserNotLoginException {
+		boolean result = userDAO.updatePhoneNumber(user,mobileNumber);
+		return result;
 	}
 
 	@Override
@@ -88,6 +93,10 @@ public class UserServiceImpl implements UserService {
 	public String selectPackage(String packageName) {
 		throw new UnsupportedOperationException("Unimplemented method 'selectPackage'");
 	}
+	
+	
+
+	
 
 	// @Override
 	// public boolean createPlanRequest(PlanRequest PlanRequest) {

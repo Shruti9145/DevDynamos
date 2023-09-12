@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>misc</name>
+=======
+	<name>build_misc</name>
+>>>>>>> fde0c608a6bcd5696b180de5648ff59d0ac31c7e
 	<comment></comment>
 	<projects>
 	</projects>

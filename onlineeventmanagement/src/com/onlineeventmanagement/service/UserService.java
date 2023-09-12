@@ -2,6 +2,7 @@ package com.onlineeventmanagement.service;
 
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserLoginException;
+import com.onlineeventmanagement.exception.UserNotActiveException;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.UserNotLoginException;
@@ -10,7 +11,7 @@ public interface UserService {
 	
 	public boolean registerUser(User user) throws UserAlreadyExsistException;
 	
-	public boolean userLogin(String userName,String password) throws UserLoginException;
+	public boolean userLogin(String userName,String password) throws UserLoginException, UserNotActiveException;
 	
 	public boolean userLogout(String userName);
 	
@@ -21,14 +22,10 @@ public interface UserService {
     public boolean updatePassword(String userName,String newPassword) throws UserNotFoundException, UserNotLoginException;
 
     /*User can Update the location in DB */
-    public User updateAddress(String location);
+    public boolean updateAddress(User user, String location) throws UserNotFoundException, UserNotLoginException;
    
     /*User can update Phone Number in DB */
-    public User updatePhoneNumber(String mobileNumber);
-
-    /*User can update Email in DB */
-    public User updateEmail(String email);
-
+    public boolean updatePhoneNumber(User user, String mobileNumber) throws UserNotFoundException, UserNotLoginException;
 
     /*
      * Method viewPackage will get the package details from Package table in DB.
@@ -38,6 +35,7 @@ public interface UserService {
 
     /*User will Select the package */
     public String selectPackage(String packageName);
+    
     /*
      * createPlanRequest will take object of PlanRequest class.
      * It uses setters of PlanRequest class to generate a plan request which will be stored in PlanRequest table in DB
@@ -49,6 +47,8 @@ public interface UserService {
      * User sets the quatation to accept or reject.
      */
     // public boolean setQuatationStatus(Quatation quatation);
+
+	boolean updateEmail(User user, String email) throws UserNotFoundException, UserNotLoginException;
 
 	
 
