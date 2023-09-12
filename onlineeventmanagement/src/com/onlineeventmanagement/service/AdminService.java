@@ -16,9 +16,9 @@ public interface AdminService {
     public Set<Vendor> seeAllVendor() throws VendorNotFoundException;
     public List<User> seeAllUser() throws UserNotFoundException;
 
-    public boolean activateUser(User user) throws UserNotFoundException;
+    public boolean updateUser(User user, int status) throws UserNotFoundException;
 
-    public boolean deactivateUser(User user) throws UserNotFoundException;
+    //public boolean deactivateUser(User user) throws UserNotFoundException;
 
 
 

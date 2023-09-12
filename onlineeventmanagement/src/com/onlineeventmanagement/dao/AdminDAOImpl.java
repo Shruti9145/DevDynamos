@@ -130,7 +130,7 @@ public class AdminDAOImpl implements AdminDAO{
     }
 
     @Override
-    public boolean activateUserStatus(User user) throws SQLException, UserNotFoundException {
+    public boolean  updateUserStatus(User user, int status) throws SQLException, UserNotFoundException {
         
         String url = "jdbc:mysql://localhost/onlineeventmanagement";
         Connection con = null; 
@@ -144,15 +144,16 @@ public class AdminDAOImpl implements AdminDAO{
         rs = stmt.executeQuery();
 
         if(rs.next()){
-            String sql2 = "update users set status=true where userName=?";
+            String sql2 = "update users set status=? where userName=?";
             stmt = con.prepareStatement(sql2);
-            stmt.setString(1, user.getUserName());
+            stmt.setInt(1,status);
+            stmt.setString(2, user.getUserName());
 
             int n = stmt.executeUpdate();
 
             if(n>0){
                 System.out.println(n + " user status is activated!!");
-                 rs.close();
+                rs.close();
                 stmt.close();
                 con.close();
                 return true;
@@ -165,41 +166,41 @@ public class AdminDAOImpl implements AdminDAO{
     	
     }
 
-    @Override
-    public boolean deactivateUserStatus(User user) throws SQLException, UserNotFoundException {
+    // @Override
+    // public boolean deactivateUserStatus(User user) throws SQLException, UserNotFoundException {
         
-        String url = "jdbc:mysql://localhost/onlineeventmanagement";
-        Connection con = null; 
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        con = DriverManager.getConnection(url, "root", "root");
+    //     String url = "jdbc:mysql://localhost/onlineeventmanagement";
+    //     Connection con = null; 
+    //     PreparedStatement stmt = null;
+    //     ResultSet rs = null;
+    //     con = DriverManager.getConnection(url, "root", "root");
         
-        String sql = "select * from users where userId=?";
-        stmt = con.prepareStatement(sql);
-        stmt.setString(1, user.getUserId());
-        rs = stmt.executeQuery();
+    //     String sql = "select * from users where userId=?";
+    //     stmt = con.prepareStatement(sql);
+    //     stmt.setString(1, user.getUserId());
+    //     rs = stmt.executeQuery();
 
-        if(rs.next()){
-            String sql2 = "update users set status=false where userID=?";
-            stmt = con.prepareStatement(sql2);
-            stmt.setString(1, user.getUserId());
+    //     if(rs.next()){
+    //         String sql2 = "update users set status=false where userID=?";
+    //         stmt = con.prepareStatement(sql2);
+    //         stmt.setString(1, user.getUserId());
 
-            int n = stmt.executeUpdate();
+    //         int n = stmt.executeUpdate();
 
-            if(n>0){
-                System.out.println(n + " user status is deactivated!!");
-                rs.close();
-                stmt.close();
-                con.close();
-                return true;
-            }
+    //         if(n>0){
+    //             System.out.println(n + " user status is deactivated!!");
+    //             rs.close();
+    //             stmt.close();
+    //             con.close();
+    //             return true;
+    //         }
 
-        }else {
-            throw new UserNotFoundException("Given User Not Found!!");
-        }
+    //     }else {
+    //         throw new UserNotFoundException("Given User Not Found!!");
+    //     }
            
-        return false;
+    //     return false;
         
-    }
+    // }
     
 }

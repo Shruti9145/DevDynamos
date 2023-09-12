@@ -31,7 +31,8 @@ public class UserDAOImpl implements UserDAO {
 			stmt.setString(1, user.getUserName());
 			stmt.setString(2, user.getName());
 			stmt.setString(3, user.getPassword());
-			stmt.setDate(4, null);
+			Date sqlDate = Date.valueOf(user.getDateOfBirth());
+			stmt.setDate(4, sqlDate);
 			stmt.setString(5, user.getMobileNumber());
 			stmt.setString(6, user.getEmail());
 			stmt.setString(7, user.getLocation());

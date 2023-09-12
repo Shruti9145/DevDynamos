@@ -47,23 +47,23 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public boolean activateUser(User user) throws UserNotFoundException {
+    public boolean updateUser(User user, int status) throws UserNotFoundException {
         
         try {
-            return adminDAO.activateUserStatus(user);
+            return adminDAO.updateUserStatus(user,status);
         } catch (SQLException e) {
             throw new UserNotFoundException("User not found in database!!");
         }
     }
 
-    @Override
-    public boolean deactivateUser(User user) throws UserNotFoundException {
+    // @Override
+    // public boolean deactivateUser(User user) throws UserNotFoundException {
       
-       try {
-        return adminDAO.deactivateUserStatus(user);
-    } catch (SQLException e) {
-        throw new UserNotFoundException("User Not Found in Database");
-    }
-    }
+    //    try {
+    //     return adminDAO.deactivateUserStatus(user);
+    // } catch (SQLException e) {
+    //     throw new UserNotFoundException("User Not Found in Database");
+    // }
+    // }
     
 }

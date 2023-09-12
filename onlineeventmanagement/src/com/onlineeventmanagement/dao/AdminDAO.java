@@ -17,8 +17,8 @@ public interface AdminDAO {
    //public Vendor deactivateVendor(Vendor vendor);
    //Logout functionality
    public List<User> displayAllUser() throws SQLException;
-   public boolean activateUserStatus(User user) throws SQLException, UserNotFoundException;
-   public boolean deactivateUserStatus(User user) throws SQLException, UserNotFoundException;
+   public boolean updateUserStatus(User user, int status) throws SQLException, UserNotFoundException;
+   //public boolean deactivateUserStatus(User user) throws SQLException, UserNotFoundException;
 
 
 }

@@ -44,11 +44,11 @@ public class AdminUI {
         }
     }
 
-    public static void activateUserPage(User user){
+    public static void updateUserPage(User user, int status){
            AdminService adminService = new AdminServiceImpl();
 
         try {
-            if(adminService.activateUser(user)){
+            if(adminService.updateUser(user,status)){
                 System.out.println("User Status is Activated");
             }
         } catch (UserNotFoundException e) {
@@ -57,17 +57,17 @@ public class AdminUI {
 
     }
 
-    public static void deactivateUserPage(User user){
-            AdminService adminService = new AdminServiceImpl();
+    // public static void deactivateUserPage(User user){
+    //         AdminService adminService = new AdminServiceImpl();
 
-            try {
-                if(adminService.deactivateUser(user)){
-                    System.out.println("User Status is Deactivated");
-                }
-            } catch (UserNotFoundException e) {
+    //         try {
+    //             if(adminService.deactivateUser(user)){
+    //                 System.out.println("User Status is Deactivated");
+    //             }
+    //         } catch (UserNotFoundException e) {
                 
-                e.printStackTrace();
-            }
-    }
+    //             e.printStackTrace();
+    //         }
+    // }
 
 }
