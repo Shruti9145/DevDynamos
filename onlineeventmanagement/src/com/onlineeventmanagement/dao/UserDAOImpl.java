@@ -23,6 +23,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet res = null;
+//		System.out.println("------- "+user);
 		try {
 			con = DriverManager.getConnection(url, "root", "root");
 			// Get Data from DB where user name is provided by user
@@ -50,7 +51,11 @@ public class UserDAOImpl implements UserDAO {
 	// User Login
 	@Override
 	public boolean userlogin(String userName, String password) throws UserLoginException, UserNotActiveException {
-		if(!getLoginStatus(userName)) {
+		/*
+		 * verify if user is Active 
+		 * if not raise user not Active exception
+		 */
+		if(!getUserActiveStatus(userName)) {
 			throw new UserNotActiveException("User is not Activated");
 		}
 		String url = "jdbc:mysql://localhost/onlineeventmanagement";
@@ -129,8 +134,12 @@ public class UserDAOImpl implements UserDAO {
 		return false;
 
 	}
+	/*
+	 * Method to get Active or DeActive status of user
+	 * If user is not active, user is Unable to login
+	 */
 	@Override
-	public boolean getLoginStatus(String userName) {
+	public boolean getUserActiveStatus(String userName) {
 		String url = "jdbc:mysql://localhost/onlineeventmanagement";
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -367,6 +376,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
+	
 	
 	
 	

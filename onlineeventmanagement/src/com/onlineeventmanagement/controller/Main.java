@@ -12,15 +12,23 @@ public class Main {
     	
         UserUI ui = new UserUI();
 
-        User user = new User("Shubhayu26", "Shubhayu" , "Password@Shubh", 
-        LocalDate.of(1995, 11, 21), "9594046574", "shu@email.com", "Pune");
+//        User user = new User("Arreb", "Arreb" , "Password@Shubh", LocalDate.of(1990, 07, 26), "9594046574", "shu@email.com", "Pune");
+          User user = new User("Shruti12", "Shruti" , "Password@Shruti", LocalDate.of(1990, 07, 26), "8790987680", "shruti@email.com", "Pune");
+
         
-        ui.registration(user);
+//        ui.registration(user);
+                
+//        AdminUI.activateUserPage(user);
         
-        // ui.login("Shubhayu26", "Password@123");
-        // ui.updatePassword("Shubhayu26", "Password@123");
-        // ui.showDetails("Shubhayu26");
-        // ui.logout("Shubhayu26");
+        
+        
+//        ui.login("Shruti12", "Password@Shruti");       
+        ui.updatePassword(user, "Password@123");
+//        ui.showDetails(user);
+//        ui.updateEmail(user,"shubhayu@gmail.com");
+//        ui.updatePhoneNumber(user,"9598654789");
+//        ui.updateAddress(user,"Mumbai");
+//        ui.logout(user);
        
       
         

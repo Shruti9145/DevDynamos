@@ -19,11 +19,13 @@ public interface UserDAO {
 	
 	public boolean getUserLoginStatus(String userName);
 	
-	public boolean getLoginStatus(String userName);
+	public boolean getUserActiveStatus(String userName);
 	
 	public User getInfo(String userName) throws UserNotFoundException, UserNotLoginException ;
 	
 	public boolean updatePassword(String userName, String newPassword) throws UserNotFoundException, UserNotLoginException;
+	
+	
 
 
 }
