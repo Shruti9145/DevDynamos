@@ -132,37 +132,28 @@ public class AdminDAOImpl implements AdminDAO{
     @Override
     public boolean activateUserStatus(User user) throws SQLException, UserNotFoundException {
         
-        String url = "jdbc:mysql://localhost/onlineeventmanagement";
-        Connection con = null; 
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        con = DriverManager.getConnection(url, "root", "root");
-        
-        String sql = "select * from users where userId=?";
-        stmt = con.prepareStatement(sql);
-        stmt.setString(1, user.getUserId());
-        rs = stmt.executeQuery();
+    	String url = "jdbc:mysql://localhost/onlineeventmanagement";
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = DriverManager.getConnection(url, "root", "root");
+			String query = "update users set status = ? where userName = ?";
+			               
+			// PreparedSatement to execute Query
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, 1);
+			stmt.setString(2, user.getUserName());
+			int rowsAffected = stmt.executeUpdate();
+			if (rowsAffected > 0) {
+				return true;
+			}
 
-        if(rs.next()){
-            String sql2 = "update users set status=true where userID=?";
-            stmt = con.prepareStatement(sql2);
-            stmt.setString(1, user.getUserId());
+		} catch (SQLException e) {
+			 throw new UserNotFoundException("Given User Not Found!!");
 
-            int n = stmt.executeUpdate();
-
-            if(n>0){
-                System.out.println(n + " user status is activated!!");
-                 rs.close();
-                stmt.close();
-                con.close();
-                return true;
-            }
-
-        }else {
-            throw new UserNotFoundException("Given User Not Found!!");
-        }
-           
-        return false;
+		}
+		return false;
+    	
     }
 
     @Override
