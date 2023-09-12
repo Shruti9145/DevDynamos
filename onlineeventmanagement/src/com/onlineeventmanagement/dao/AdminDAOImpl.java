@@ -138,15 +138,15 @@ public class AdminDAOImpl implements AdminDAO{
         ResultSet rs = null;
         con = DriverManager.getConnection(url, "root", "root");
         
-        String sql = "select * from users where userId=?";
+        String sql = "select * from users where userName =?";
         stmt = con.prepareStatement(sql);
-        stmt.setString(1, user.getUserId());
+        stmt.setString(1, user.getUserName());
         rs = stmt.executeQuery();
 
         if(rs.next()){
-            String sql2 = "update users set status=true where userID=?";
+            String sql2 = "update users set status=true where userName=?";
             stmt = con.prepareStatement(sql2);
-            stmt.setString(1, user.getUserId());
+            stmt.setString(1, user.getUserName());
 
             int n = stmt.executeUpdate();
 

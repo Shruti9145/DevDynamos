@@ -11,14 +11,15 @@ public class Main {
     	
         UserUI ui = new UserUIImpl();
 
-        User user = new User("Shubhayu26", "Shubhayu" , "Password@Shubh", null, "9594046574", "shu@email.com", "Pune");
+        User user = new User("Shubhayu26", "Shubhayu" , "Password@Shubh", 
+        LocalDate.of(1995, 11, 21), "9594046574", "shu@email.com", "Pune");
         
-//        ui.registration(user);
+        ui.registration(user);
         
-        ui.login("Shubhayu26", "Password@123");
-        ui.updatePassword("Shubhayu26", "Password@123");
-        ui.showDetails("Shubhayu26");
-        ui.logout("Shubhayu26");
+        // ui.login("Shubhayu26", "Password@123");
+        // ui.updatePassword("Shubhayu26", "Password@123");
+        // ui.showDetails("Shubhayu26");
+        // ui.logout("Shubhayu26");
        
       
         
