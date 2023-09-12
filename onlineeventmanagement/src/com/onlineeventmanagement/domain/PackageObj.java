@@ -3,13 +3,16 @@ package com.onlineeventmanagement.domain;
 import java.util.Objects;
 import java.util.Set;
 
-public class Package {
+public class PackageObj {
 	private int id;
 	private String type;
 	private Set<String> services;
 	private double amount;
 	
-	public Package(int id, String type, Set<String> services, double amount) {
+	public PackageObj() {
+		// TODO Auto-generated constructor stub
+	}
+	public PackageObj(int id, String type, Set<String> services, double amount) {
 		this.id = id;
 		this.type = type;
 		this.services = services;
@@ -57,7 +60,7 @@ public class Package {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Package other = (Package) obj;
+		PackageObj other = (PackageObj) obj;
 		return id == other.id;
 	}
 

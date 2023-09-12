@@ -8,15 +8,43 @@ public class Vendor {
 	private String id;
 	private String address;
 	private String email;
-	private double contactNo;
-	private Set<Package> eventPackage;
+	private String contactNo;
+	private Set<PackageObj> eventPackage;
+	private String username;
+	private String password;
 	
-	public Vendor(){
+	public Vendor() {
+		// TODO Auto-generated constructor stub
+	}
+	
 
+
+	public String getUsername() {
+		return username;
 	}
 
-	public Vendor(String name, String id, String address, String email, double contactNo, Set<Package> eventPackage) {
-		
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+	public Vendor(String name, String id, String address, String email, String contactNo, Set<PackageObj> eventPackage) {
+
 		this.name = name;
 		this.id = id;
 		this.address = address;
@@ -48,16 +76,16 @@ public class Vendor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public double getContactNo() {
+	public String getContactNo() {
 		return contactNo;
 	}
-	public void setContactNo(double contactNo) {
+	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
-	public Set<Package> getEventPackage() {
+	public Set<PackageObj> getEventPackage() {
 		return eventPackage;
 	}
-	public void setEventPackage(Set<Package> eventPackage) {
+	public void setEventPackage(Set<PackageObj> eventPackage) {
 		this.eventPackage = eventPackage;
 	}
 	@Override
@@ -78,7 +106,8 @@ public class Vendor {
 	@Override
 	public String toString() {
 		return "Vendor [name=" + name + ", id=" + id + ", address=" + address + ", email=" + email + ", contactNo="
-				+ contactNo + ", eventPackage=" + eventPackage + "]";
+				+ contactNo + ", eventPackage=" + eventPackage + ", username=" + username + ", password=" + password
+				+ "]";
 	}
 	
 	
