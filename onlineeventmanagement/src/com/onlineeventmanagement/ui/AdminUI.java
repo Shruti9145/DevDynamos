@@ -44,13 +44,24 @@ public class AdminUI {
         }
     }
 
-    public static void updateUserPage(User user, int status){
+    public static void updateUserPage(User user, String status){
            AdminService adminService = new AdminServiceImpl();
 
         try {
-            if(adminService.updateUser(user,status)){
+            if(status.equals("activate")){
+                int bool = 1;
+                if(adminService.updateUser(user,bool)){
                 System.out.println("User Status is Activated");
             }
+            }
+
+            if(status.equals("deactivate")){
+                int bool = 0;
+                if(adminService.updateUser(user,bool)){
+                System.out.println("User Status is deactivated");
+            }
+            }
+            
         } catch (UserNotFoundException e) {
             e.getMessage();
         }
