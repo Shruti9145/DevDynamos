@@ -30,7 +30,7 @@ public class AdminDAOImpl implements AdminDAO{
         // Check if the vendor already exists by email
         String checkSql = "SELECT * FROM vendors WHERE vendor_email = ?";
         PreparedStatement checkStmt = con.prepareStatement(checkSql);
-        //checkStmt.setString(1, vendor.getVendoEmail());
+        checkStmt.setString(1, vendor.getEmail());
         rs = checkStmt.executeQuery();
 
         if(rs.next()){
@@ -38,14 +38,15 @@ public class AdminDAOImpl implements AdminDAO{
             throw new VendorAlreadyExistsException("This Vendor Id is Already Exists in the database");
         }else{
 
-        String sql = "insert into vendors values(?,?,?,?,?,?)";
+        String sql = "insert into vendors values(?,?,?,?,?,?,?)";
         stmt = con.prepareStatement(sql);
-        //stmt.setInt(1, vendor.getVendorId);
-        stmt.setString(2,"vendor.getVendorName()");
-        stmt.setString(3, "vendor.getAddress()");
-        stmt.setString(4, "vendor.getEmail()");
-        stmt.setString(5, "vendor.getVendorContact()");
-        //stmt.setString(6, "vendor.getEventPackage().getId()");
+        //stmt.setString(1,vendor.getId());
+        stmt.setString(2,vendor.getName());
+        stmt.setString(3,vendor.getAddress());
+        stmt.setString(4,vendor.getEmail());
+        stmt.setString(5,vendor.getContactNo());
+        // stmt.setString(6,vendor.getUsername());
+        // stmt.setString(7,vendor.getPassword());
 
         int n = stmt.executeUpdate();
         System.out.println(n + " Vendor Detail Inserted!!!");
@@ -73,12 +74,10 @@ public class AdminDAOImpl implements AdminDAO{
 
         while(rs.next()){
             Vendor vendor = new Vendor();
-            //vendor.setVendorName(rs.getString("vendor_name"));
-            //vendor.setVendorAddress(rs.getString("vendor_address"));
-            //vendor.setVendorEmail(rs.getString("vendor_email"));
-            //vendor.setVendorContactNumber(rs.getString("vendor_contact_number"));
-            //vendor.setVendorEventPackage(rs.getInt(event_package_id));
-            //here we need to add the event package in the vendor.
+            vendor.setName(rs.getString("name"));
+            vendor.setAddress(rs.getString("address"));
+            vendor.setEmail(rs.getString("email"));
+            vendor.setContactNo(rs.getString("contact_number"));
             vendors.add(vendor);
         }
 
@@ -138,7 +137,7 @@ public class AdminDAOImpl implements AdminDAO{
         ResultSet rs = null;
         con = DriverManager.getConnection(url, "root", "root");
         
-        String sql = "select * from users where userName =?";
+        String sql = "select * from users where userName=?";
         stmt = con.prepareStatement(sql);
         stmt.setString(1, user.getUserName());
         rs = stmt.executeQuery();
