@@ -49,7 +49,7 @@ public class AdminUI {
             try {
                  // Attempt to add a new vendor
                 Vendor newVendor = adminService.addVendor(vendor);
-                System.out.println(newVendor);
+                System.out.println(newVendor + " added to the database");
             } catch (VendorAlreadyExistsException e) {
                  // Handle and print VendorAlreadyExistsException message
                 e.getMessage();
@@ -76,14 +76,14 @@ public class AdminUI {
 
         try {
             // Check the requested status change (activate or deactivate) and update user status accordingly
-            if(status.equals("activate")){
+            if(status.equalsIgnoreCase("activate")){
                 int bool = 1; // Assuming 1 represents activation
                 if(adminService.updateUser(user,bool)){
                 System.out.println("User Status is Activated");
             }
             }
 
-            if(status.equals("deactivate")){
+            if(status.equalsIgnoreCase("deactivate")){
                 int bool = 0;// Assuming 0 represents deactivation
                 if(adminService.updateUser(user,bool)){
                 System.out.println("User Status is deactivated");
