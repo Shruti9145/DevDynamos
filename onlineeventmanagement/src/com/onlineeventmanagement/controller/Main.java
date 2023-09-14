@@ -4,6 +4,7 @@ package com.onlineeventmanagement.controller;
 import java.time.LocalDate;
 
 import com.onlineeventmanagement.domain.User;
+import com.onlineeventmanagement.domain.Vendor;
 import com.onlineeventmanagement.ui.AdminUI;
 import com.onlineeventmanagement.ui.UserUI;
 
@@ -18,7 +19,13 @@ public class Main {
         
          ui.registration(user);
                 
-//        AdminUI.activateUserPage(user);
+      // Admin Functionalities
+         AdminUI.seeAllUserPage();
+         AdminUI.seeAllVendorPage();
+         AdminUI.adminLoginPage("devdynamos@123", "Devdynamos@111");
+         AdminUI.updateUserPage(user,"activate");
+         AdminUI.addVendorPage(new Vendor());
+         
         
         
         
