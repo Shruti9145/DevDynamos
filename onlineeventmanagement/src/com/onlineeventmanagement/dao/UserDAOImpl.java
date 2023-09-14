@@ -7,7 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.onlineeventmanagement.domain.Quotation;
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserLoginException;
 import com.onlineeventmanagement.exception.UserNotActiveException;
@@ -278,7 +281,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 
 	}
-
+	@Override
 	public boolean updateEmail(User user, String email) throws UserNotFoundException, UserNotLoginException {
 		/*
 		 * verify if user is login 
@@ -311,7 +314,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 		
 	}
-
+	@Override
 	public boolean updatePhoneNumber(User user, String mobileNumber) throws UserNotFoundException, UserNotLoginException {
 		/*
 		 * verify if user is login 
@@ -343,7 +346,7 @@ public class UserDAOImpl implements UserDAO {
 			throw new UserNotFoundException(" Invalid User ID. Not able to change Password");
 		}
 	}
-
+	@Override
 	public boolean updateAddress(User user, String location) throws UserNotFoundException, UserNotLoginException {
 		/*
 		 * verify if user is login 
@@ -375,6 +378,132 @@ public class UserDAOImpl implements UserDAO {
 			throw new UserNotFoundException(" Invalid User ID. Not able to change Password");
 		}
 	}
+
+	@Override
+	public User getUser(int userId) throws UserNotFoundException {
+		
+		String url = "jdbc:mysql://localhost/onlineeventmanagement";
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet res = null;
+
+		try {
+			con = DriverManager.getConnection(url, "root", "root");
+			String query = "select * from users where userId = ?";
+			// PreparedSatement to execute Query
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, userId);
+			res = stmt.executeQuery();
+			
+			User user = new User();
+			while (res.next()) {
+				user.setUserId(res.getString("userId"));
+				user.setPassword(res.getString("password"));
+				user.setName(res.getString("name"));
+				user.setUserName(res.getString("userName"));
+				user.setMobileNumber(res.getString("mobileNumber"));
+				user.setEmail(res.getString("email"));
+				user.setLocation(res.getString("location"));
+				Date dateOfBirthSql = res.getDate("dateOfBirth");
+				Date utilDate = new Date(dateOfBirthSql.getTime());
+				LocalDate newDate = utilDate.toLocalDate(); 
+				user.setDateOfBirth(newDate);
+			}
+			stmt.close();
+			con.close();
+			return user;
+		} catch (SQLException e) {
+			throw new UserNotFoundException("DAO: Invalid User");
+		}
+	}
+
+	
+	public List<Quotation> getAllQuotation(String userName) throws UserNotLoginException, UserNotFoundException {
+
+		/*
+		 * verify if user is login 
+		 * if not raise user not login exception
+		 * 
+		 */
+		
+		if(!getUserLoginStatus(userName)) {
+			throw new UserNotLoginException("User need to login first");
+		}
+		
+		String url = "jdbc:mysql://localhost/onlineeventmanagement";
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet res = null;
+		List<Quotation> quotationList = new ArrayList<>();
+		try {
+			con = DriverManager.getConnection(url, "root", "root");
+			String query = " select * from quotation where user_id = (select userId from users where userName = ?)";
+			// PreparedSatement to execute Query
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, userName);
+			res = stmt.executeQuery();
+			
+			
+			while (res.next()) {
+				Quotation quotation = new Quotation();
+				quotation.setId(res.getInt("quotation_id"));
+				quotation.setEstimatedAmmount(res.getDouble("estimated_amount"));
+				quotation.setPlanRequestId(res.getInt("plan_request_id"));
+				System.out.println("Dao id=  "+res.getInt("user_id"));
+				quotation.setUserId(res.getInt("user_id"));
+				quotation.setVendorId(res.getInt("vendor_id"));
+				quotation.setStatus(res.getString("status"));
+				
+				quotationList.add(quotation);
+				
+			}
+			stmt.close();
+			con.close();
+			return quotationList;
+		} catch (SQLException e) {
+			throw new UserNotFoundException("DAO: Invalid User");
+		}
+
+		
+			
+	}
+
+	@Override
+	public boolean setQuotationStatus(String userName,int quotationId,String status) throws UserNotLoginException {
+		/*
+		 * verify if user is login 
+		 * if not raise user not login exception
+		 * */
+		if(!getUserLoginStatus(userName)) {
+			throw new UserNotLoginException("User need to login first");
+		}
+		
+		String url = "jdbc:mysql://localhost/onlineeventmanagement";
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = DriverManager.getConnection(url, "root", "root");
+			// Update query to update the Login/Logout status of user in DB;
+			String query = "update quotation set status = ? where quotation_id = ? ";
+			// PreparedSatement to execute Query
+			stmt = con.prepareStatement(query);
+			stmt.setString(1, status);
+			stmt.setInt(2, quotationId);
+			int rowsAffected = stmt.executeUpdate();
+			if (rowsAffected > 0) {
+				return true;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		return false;
+		
+	}
+	
+	
 
 	
 	

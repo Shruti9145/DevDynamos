@@ -8,19 +8,25 @@ public class Quotation {
 	private Vendor vendor;
 	private User user;
 	private PlanRequest planRequest;
-	private String status;
-	private String statusAfterQuotation;
-	public Quotation(int id, double estimatedAmmount, Vendor vendor, User user, PlanRequest planRequest, String status,
-			String statusAfterQuotation) {
-		super();
-		this.id = id;
+	private String status="pending";
+	private int vendorId;
+	private int userId;
+	private int planRequestId;
+	
+	
+	public Quotation(double estimatedAmmount, Vendor vendor, User user, PlanRequest planRequest, String status) {
+		
 		this.estimatedAmmount = estimatedAmmount;
 		this.vendor = vendor;
 		this.user = user;
 		this.planRequest = planRequest;
-		this.status = "pending";
-		this.statusAfterQuotation = statusAfterQuotation;
+		this.status = status;
 	}
+	
+
+public Quotation() {
+	// TODO Auto-generated constructor stub
+}
 	public int getId() {
 		return id;
 	}
@@ -57,18 +63,40 @@ public class Quotation {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getStatusAfterQuotation() {
-		return statusAfterQuotation;
+	
+	public int getVendorId() {
+		return vendorId;
 	}
-	public void setStatusAfterQuotation(String statusAfterQuotation) {
-		this.statusAfterQuotation = statusAfterQuotation;
+
+	public void setVendorId(int vendorId) {
+		this.vendorId = vendorId;
 	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getPlanRequestId() {
+		return planRequestId;
+	}
+
+	public void setPlanRequestId(int planRequestId) {
+		this.planRequestId = planRequestId;
+	}
+
+	
 	@Override
 	public String toString() {
-		return "Quotation [id=" + id + ", estimatedAmmount=" + estimatedAmmount + ", vendor=" + vendor + ", user="
-				+ user + ", planRequest=" + planRequest + ", status=" + status + ", statusAfterQuotation="
-				+ statusAfterQuotation + "]";
+		return "Quotation [id=" + id + ", estimatedAmmount=" + estimatedAmmount + ", status=" + status
+				+  ", vendorId=" + vendorId + ", userId=" + userId
+				+ ", planRequestId=" + planRequestId + "]";
 	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

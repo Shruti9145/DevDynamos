@@ -1,5 +1,8 @@
 package com.onlineeventmanagement.service;
 
+import java.util.List;
+
+import com.onlineeventmanagement.domain.Quotation;
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserLoginException;
 import com.onlineeventmanagement.exception.UserNotActiveException;
@@ -36,19 +39,11 @@ public interface UserService {
     /*User will Select the package */
     public String selectPackage(String packageName);
     
-    /*
-     * createPlanRequest will take object of PlanRequest class.
-     * It uses setters of PlanRequest class to generate a plan request which will be stored in PlanRequest table in DB
-     * View PlanRequest of Vendor can view the request from DB.
-     */
-    // public boolean createPlanRequest(PlanRequest PlanRequest); 
-    /*
-     * vendor Provides a quatation 
-     * User sets the quatation to accept or reject.
-     */
-    // public boolean setQuatationStatus(Quatation quatation);
+    public boolean setQuotationStatus(String userName,int quotationId,String status);
 
 	boolean updateEmail(User user, String email) throws UserNotFoundException, UserNotLoginException;
+
+	public List<Quotation> showAllQuotations(String userName);
 
 	
 

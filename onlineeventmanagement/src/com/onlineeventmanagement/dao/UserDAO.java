@@ -1,5 +1,8 @@
 package com.onlineeventmanagement.dao;
 
+import java.util.List;
+
+import com.onlineeventmanagement.domain.Quotation;
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserLoginException;
@@ -25,7 +28,17 @@ public interface UserDAO {
 	
 	public boolean updatePassword(String userName, String newPassword) throws UserNotFoundException, UserNotLoginException;
 	
+	public boolean updateEmail(User user, String email) throws UserNotFoundException, UserNotLoginException;
 	
+	public boolean updatePhoneNumber(User user, String mobileNumber) throws UserNotFoundException, UserNotLoginException;
+	
+	public boolean updateAddress(User user, String location) throws UserNotFoundException, UserNotLoginException;
+	
+	public User getUser(int userId) throws UserNotFoundException;
+	
+	public List<Quotation> getAllQuotation(String userName) throws UserNotLoginException, UserNotFoundException;
+	
+	public boolean setQuotationStatus(String userName,int quoatationId,String status) throws UserNotLoginException ;
 
 
 }

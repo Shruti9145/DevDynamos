@@ -1,5 +1,8 @@
 package com.onlineeventmanagement.ui;
 
+import java.util.List;
+
+import com.onlineeventmanagement.domain.Quotation;
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserLoginException;
 import com.onlineeventmanagement.exception.UserNotActiveException;
@@ -58,7 +61,6 @@ public class UserUI  {
 		}
 		
 	}
-	
 	
 	public void showDetails(User user) {
 		
@@ -134,7 +136,26 @@ public class UserUI  {
 		}
 		
 	}
+
+	public void showAllQuotations(String userName) {
+		
+		List<Quotation> quotationList = userService.showAllQuotations(userName);
+		for (Quotation quotation : quotationList) {
+			System.out.println(quotation);
+			
+		}
+		
+	}
 	
+	public void setQuotationStatus(String userName, int quotationId, String status) {
+		boolean result=userService.setQuotationStatus(userName, quotationId, status);
+		if(result) {
+			System.out.println("User Status Updated Successfully");
+		}
+		else {
+			System.out.println("User Status update Failed");
+		}
+	}
 	
 
 	

@@ -1,6 +1,10 @@
 package com.onlineeventmanagement.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.onlineeventmanagement.dao.UserDAOImpl;
+import com.onlineeventmanagement.domain.Quotation;
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserLoginException;
@@ -93,21 +97,33 @@ public class UserServiceImpl implements UserService {
 	public String selectPackage(String packageName) {
 		throw new UnsupportedOperationException("Unimplemented method 'selectPackage'");
 	}
+
+	@Override
+	public List<Quotation> showAllQuotations(String userName) {
+		try {
+			List<Quotation> quotationList = new ArrayList<>();
+			quotationList=userDAO.getAllQuotation(userName);
+			return quotationList;
+		} catch (UserNotLoginException | UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+
+	@Override
+	public boolean setQuotationStatus(String userName, int quotationId, String status) {
+		try {
+			boolean result = userDAO.setQuotationStatus(userName, quotationId, status);
+			return result;
+		} catch (UserNotLoginException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 	
-
-	
-
-	// @Override
-	// public boolean createPlanRequest(PlanRequest PlanRequest) {
-	// throw new UnsupportedOperationException("Unimplemented method
-	// 'createPlanRequest'");
-	// }
-
-	// @Override
-	// public boolean setQuatationStatus(Quatation quatation) {
-	// throw new UnsupportedOperationException("Unimplemented method
-	// 'setQuatationStatus'");
-	// }
 
 }
