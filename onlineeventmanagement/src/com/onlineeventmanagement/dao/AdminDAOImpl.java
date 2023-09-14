@@ -14,13 +14,40 @@ import java.util.Set;
 
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.domain.Vendor;
+import com.onlineeventmanagement.exception.InvalidCredentialException;
 import com.onlineeventmanagement.exception.UserNotFoundException;
 import com.onlineeventmanagement.exception.VendorAlreadyExistsException;
 
 public class AdminDAOImpl implements AdminDAO{
 
     @Override
+    public boolean adminLogin(String username, String password) throws SQLException, InvalidCredentialException {
+        // Establish a database connection
+        String url = "jdbc:mysql://localhost/onlineeventmanagement";
+        Connection con = null; 
+        ResultSet rs = null;
+        con = DriverManager.getConnection(url, "root", "root");
+
+         // Check if the admin credentials are valid
+        String checkSql = "SELECT * FROM admin WHERE username=? and password=?";
+        PreparedStatement checkStmt = con.prepareStatement(checkSql);
+        checkStmt.setString(1, username);
+        checkStmt.setString(2, password);
+        rs = checkStmt.executeQuery();
+
+        if(rs.next()){
+             // Admin credentials are valid
+            return true;
+        }else{
+             // Invalid admin credentials
+            throw new InvalidCredentialException("Invalid Username/Password");
+        }
+        
+    }
+
+    @Override
     public Vendor saveVendor(Vendor vendor) throws SQLException, VendorAlreadyExistsException {
+         // Establish a database connection
         String url = "jdbc:mysql://localhost/onlineeventmanagement";
         Connection con = null; 
         PreparedStatement stmt = null;
@@ -38,15 +65,14 @@ public class AdminDAOImpl implements AdminDAO{
             throw new VendorAlreadyExistsException("This Vendor Id is Already Exists in the database");
         }else{
 
-        String sql = "insert into vendors values(?,?,?,?,?,?,?)";
+        String sql = "insert into vendors (name,address,email,contact_number,username,password) values(?,?,?,?,?,?)";
         stmt = con.prepareStatement(sql);
-        //stmt.setString(1,vendor.getId());
-        stmt.setString(2,vendor.getName());
-        stmt.setString(3,vendor.getAddress());
-        stmt.setString(4,vendor.getEmail());
-        stmt.setString(5,vendor.getContactNo());
-        // stmt.setString(6,vendor.getUsername());
-        // stmt.setString(7,vendor.getPassword());
+        stmt.setString(1,vendor.getName());
+        stmt.setString(2,vendor.getAddress());
+        stmt.setString(3,vendor.getEmail());
+        stmt.setString(4,vendor.getContactNo());
+        stmt.setString(5,vendor.getUsername());
+        stmt.setString(6,vendor.getPassword());
 
         int n = stmt.executeUpdate();
         System.out.println(n + " Vendor Detail Inserted!!!");
@@ -59,7 +85,7 @@ public class AdminDAOImpl implements AdminDAO{
 
     @Override
     public Set<Vendor> displayAllVendor() throws SQLException {
-
+         // Establish a database connection
         String url = "jdbc:mysql://localhost/onlineeventmanagement";
         Connection con = null; 
         PreparedStatement stmt = null;
@@ -68,6 +94,7 @@ public class AdminDAOImpl implements AdminDAO{
         Set<Vendor> vendors = new HashSet<>();
         con = DriverManager.getConnection(url, "root", "root");
 
+         // Retrieve and populate vendor information
         String sql = "select * from vendors";
         stmt = con.prepareStatement(sql);
         rs = stmt.executeQuery();
@@ -78,6 +105,8 @@ public class AdminDAOImpl implements AdminDAO{
             vendor.setAddress(rs.getString("address"));
             vendor.setEmail(rs.getString("email"));
             vendor.setContactNo(rs.getString("contact_number"));
+            vendor.setUsername(rs.getString("username"));
+            vendor.setPassword(rs.getString("password"));
             vendors.add(vendor);
         }
 
@@ -91,7 +120,7 @@ public class AdminDAOImpl implements AdminDAO{
 
     @Override
     public List<User> displayAllUser() throws SQLException {
-       
+        // Establish a database connection
         String url = "jdbc:mysql://localhost/onlineeventmanagement";
         Connection con = null; 
         PreparedStatement stmt = null;
@@ -100,6 +129,7 @@ public class AdminDAOImpl implements AdminDAO{
 
         con = DriverManager.getConnection(url, "root", "root");
 
+         // Retrieve and populate user information
         String sql = "select * from users";
         stmt = con.prepareStatement(sql);
         rs = stmt.executeQuery();
@@ -130,19 +160,21 @@ public class AdminDAOImpl implements AdminDAO{
 
     @Override
     public boolean  updateUserStatus(User user, int status) throws SQLException, UserNotFoundException {
-        
+         // Establish a database connection
         String url = "jdbc:mysql://localhost/onlineeventmanagement";
         Connection con = null; 
         PreparedStatement stmt = null;
         ResultSet rs = null;
         con = DriverManager.getConnection(url, "root", "root");
         
+        // Check if the user exists by username
         String sql = "select * from users where userName=?";
         stmt = con.prepareStatement(sql);
         stmt.setString(1, user.getUserName());
         rs = stmt.executeQuery();
 
         if(rs.next()){
+            // Update the user's status
             String sql2 = "update users set status=? where userName=?";
             stmt = con.prepareStatement(sql2);
             stmt.setInt(1,status);
@@ -159,47 +191,10 @@ public class AdminDAOImpl implements AdminDAO{
             }
 
 		} else{
+             // User not found
 			 throw new UserNotFoundException("Given User Not Found!!");
         }
 		return false;
     	
     }
-
-    // @Override
-    // public boolean deactivateUserStatus(User user) throws SQLException, UserNotFoundException {
-        
-    //     String url = "jdbc:mysql://localhost/onlineeventmanagement";
-    //     Connection con = null; 
-    //     PreparedStatement stmt = null;
-    //     ResultSet rs = null;
-    //     con = DriverManager.getConnection(url, "root", "root");
-        
-    //     String sql = "select * from users where userId=?";
-    //     stmt = con.prepareStatement(sql);
-    //     stmt.setString(1, user.getUserId());
-    //     rs = stmt.executeQuery();
-
-    //     if(rs.next()){
-    //         String sql2 = "update users set status=false where userID=?";
-    //         stmt = con.prepareStatement(sql2);
-    //         stmt.setString(1, user.getUserId());
-
-    //         int n = stmt.executeUpdate();
-
-    //         if(n>0){
-    //             System.out.println(n + " user status is deactivated!!");
-    //             rs.close();
-    //             stmt.close();
-    //             con.close();
-    //             return true;
-    //         }
-
-    //     }else {
-    //         throw new UserNotFoundException("Given User Not Found!!");
-    //     }
-           
-    //     return false;
-        
-    // }
-    
 }

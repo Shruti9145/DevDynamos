@@ -17,7 +17,9 @@ public class Main {
 
         
 //        ui.registration(user);
-                
+        
+        AdminUI.adminLoginPage("devdynamos@123", "Devdynamos@111");
+
 //        AdminUI.activateUserPage(user);
         
         
