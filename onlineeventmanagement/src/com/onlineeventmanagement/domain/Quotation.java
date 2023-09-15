@@ -3,7 +3,7 @@ package com.onlineeventmanagement.domain;
 import java.util.Objects;
 
 public class Quotation {
-	private int id;
+	private int quotationId;
 	private double estimatedAmmount;
 	private Vendor vendor;
 	private User user;
@@ -27,11 +27,11 @@ public class Quotation {
 public Quotation() {
 	// TODO Auto-generated constructor stub
 }
-	public int getId() {
-		return id;
+	public int getQuotationId() {
+		return quotationId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setQuotationId(int quotationId) {
+		this.quotationId = quotationId;
 	}
 	public double getEstimatedAmmount() {
 		return estimatedAmmount;
@@ -88,19 +88,13 @@ public Quotation() {
 		this.planRequestId = planRequestId;
 	}
 
-	
-	@Override
-	public String toString() {
-		return "Quotation [id=" + id + ", estimatedAmmount=" + estimatedAmmount + ", status=" + status
-				+  ", vendorId=" + vendorId + ", userId=" + userId
-				+ ", planRequestId=" + planRequestId + "]";
-	}
-
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(quotationId);
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,12 +104,14 @@ public Quotation() {
 		if (getClass() != obj.getClass())
 			return false;
 		Quotation other = (Quotation) obj;
-		return id == other.id;
+		return quotationId == other.quotationId;
 	}
-	
-	
-	
-	
-	
 
+
+	@Override
+	public String toString() {
+		return "Quotation [quotationId=" + quotationId + ", estimatedAmmount=" + estimatedAmmount + ", vendor=" + vendor
+				+ ", user=" + user + ", planRequest=" + planRequest + ", status=" + status + ", vendorId=" + vendorId
+				+ ", userId=" + userId + ", planRequestId=" + planRequestId + "]";
+	}
 }

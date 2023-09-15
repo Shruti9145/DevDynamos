@@ -4,26 +4,26 @@ import java.util.Objects;
 import java.util.Set;
 
 public class PackageObj {
-	private int id;
+	private int packageId;
 	private String type;
 	private Set<String> services;
 	private double amount;
+	private Vendor vendor;
 	
-	public PackageObj() {
-		// TODO Auto-generated constructor stub
-	}
-	public PackageObj(int id, String type, Set<String> services, double amount) {
-		this.id = id;
+	public PackageObj() {}
+	
+	public PackageObj(String type, Set<String> services, double amount, Vendor vendor) {
 		this.type = type;
 		this.services = services;
 		this.amount = amount;
+		this.vendor = vendor;
 	}
 
-	public int getId() {
-		return id;
+	public int getPackageId() {
+		return packageId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setPackageId(int packageId) {
+		this.packageId = packageId;
 	}
 
 	public String getType() {
@@ -47,9 +47,16 @@ public class PackageObj {
 		this.amount = amount;
 	}
 
+	public Vendor getVendor() {
+		return vendor;
+	}
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(packageId);
 	}
 
 	@Override
@@ -61,11 +68,11 @@ public class PackageObj {
 		if (getClass() != obj.getClass())
 			return false;
 		PackageObj other = (PackageObj) obj;
-		return id == other.id;
+		return packageId == other.packageId;
 	}
 
 	@Override
 	public String toString() {
-		return "Package [id=" + id + ", type=" + type + ", services=" + services + ", amount=" + amount + "]";
+		return "PackageObj [packageId=" + packageId + ", type=" + type + ", services=" + services + ", amount=" + amount + ", vendor=" + vendor + "]";
 	}
 }

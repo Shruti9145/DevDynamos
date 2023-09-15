@@ -1,10 +1,11 @@
 package com.onlineeventmanagement.domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class User {
 	private String userName;
-	private String userId;
+	private int userId;
 	private String name;
 	private String password;
 	private LocalDate dateOfBirth;
@@ -45,11 +46,11 @@ public class User {
 		this.userName = userName;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -117,13 +118,9 @@ public class User {
 				+ location + ", status=" + status + "]";
 	}
 
-	/* Overrided equals and hashmap methods */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		return result;
+		return Objects.hash(userId);
 	}
 
 	@Override
@@ -135,12 +132,10 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
-		return true;
+		return userId == other.userId;
 	}
+
+	/* Overrided equals and hashmap methods */
+	
 
 }

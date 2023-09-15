@@ -1,11 +1,24 @@
 package com.onlineeventmanagement.service;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import com.onlineeventmanagement.dao.PackageDAO;
+import com.onlineeventmanagement.dao.PackageDAOImpl;
+import com.onlineeventmanagement.dao.PlanRequestDAO;
+import com.onlineeventmanagement.dao.PlanRequestDAOImpl;
+import com.onlineeventmanagement.dao.QuotationDAO;
+import com.onlineeventmanagement.dao.QuotationDAOImpl;
 import com.onlineeventmanagement.dao.UserDAOImpl;
+import com.onlineeventmanagement.domain.PackageObj;
+import com.onlineeventmanagement.domain.PlanRequest;
 import com.onlineeventmanagement.domain.Quotation;
 import com.onlineeventmanagement.domain.User;
+import com.onlineeventmanagement.exception.InvalidDate;
+import com.onlineeventmanagement.exception.NumberPeople;
 import com.onlineeventmanagement.exception.UserAlreadyExsistException;
 import com.onlineeventmanagement.exception.UserLoginException;
 import com.onlineeventmanagement.exception.UserNotActiveException;
@@ -89,27 +102,45 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void viewPackage() {
-		throw new UnsupportedOperationException("Unimplemented method 'viewPackage'");
-	}
-
-	@Override
-	public String selectPackage(String packageName) {
-		throw new UnsupportedOperationException("Unimplemented method 'selectPackage'");
-	}
-
-	@Override
-	public List<Quotation> showAllQuotations(String userName) {
-		try {
-			List<Quotation> quotationList = new ArrayList<>();
-			quotationList=userDAO.getAllQuotation(userName);
-			return quotationList;
-		} catch (UserNotLoginException | UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+	public List<PackageObj> viewPackage() throws SQLException {
+		PackageDAO packageDAO = new PackageDAOImpl();
+		List<PackageObj> packages = packageDAO.searchPackage();
 		
+		return packages;
+	}
+
+	@Override
+	public PlanRequest selectPackage(int packageId, LocalDate fromDate, LocalDate toDate, int numberPeople, Set<String> otherServices, User user) throws SQLException {
+		List<PackageObj> packages = viewPackage();
+		
+		for(PackageObj packageObj : packages)	{
+			if(packageObj.getPackageId() == packageId)	{
+				PlanRequestDAO planRequestDAO = new PlanRequestDAOImpl();
+				try {
+					PlanRequest planRequest = new PlanRequest(fromDate, toDate, packageObj.getServices(), numberPeople, otherServices, packageObj, user);
+					planRequestDAO.insertPlanRequest(planRequest);
+					
+					return planRequest;
+				} catch (SQLException | InvalidDate | NumberPeople e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return null;
+	}
+
+	@Override
+	public List<Quotation> showAllQuotations(int userId) throws SQLException, UserNotFoundException {
+		QuotationDAO quotationDAO = new QuotationDAOImpl(); 
+		List<Quotation> quotations = quotationDAO.searchQuotations();
+		List<Quotation> quotationUser = new ArrayList<>();
+		
+		for(Quotation quotation : quotations)
+			if(quotation.getUserId() == userId)
+				quotationUser.add(quotation);
+		
+		return quotations;
 	}
 
 	@Override

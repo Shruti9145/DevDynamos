@@ -1,7 +1,12 @@
 package com.onlineeventmanagement.ui;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
+import com.onlineeventmanagement.domain.PackageObj;
+import com.onlineeventmanagement.domain.PlanRequest;
 import com.onlineeventmanagement.domain.Quotation;
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserLoginException;
@@ -137,14 +142,19 @@ public class UserUI  {
 		
 	}
 
-	public void showAllQuotations(String userName) {
+	public void showAllQuotations(int userId) {
 		
-		List<Quotation> quotationList = userService.showAllQuotations(userName);
-		for (Quotation quotation : quotationList) {
-			System.out.println(quotation);
-			
+		List<Quotation> quotationList;
+		try {
+			quotationList = userService.showAllQuotations(userId);
+			for (Quotation quotation : quotationList) {
+				System.out.println(quotation);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (UserNotFoundException e) {
+			e.printStackTrace();
 		}
-		
 	}
 	
 	public void setQuotationStatus(String userName, int quotationId, String status) {
@@ -159,7 +169,14 @@ public class UserUI  {
 	
 
 	
-
+	public PlanRequest selectPackage(int packageId, LocalDate fromDate, LocalDate toDate, int numberPeople, Set<String> otherServices, User user)	{
+		try {
+			return userService.selectPackage(packageId, fromDate, toDate, numberPeople, otherServices, user);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 
 	

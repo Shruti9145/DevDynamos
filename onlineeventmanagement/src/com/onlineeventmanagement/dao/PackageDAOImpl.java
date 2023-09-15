@@ -1,4 +1,3 @@
-
 package com.onlineeventmanagement.dao;
 
 import java.sql.Connection;
@@ -11,29 +10,30 @@ import java.util.List;
 import java.util.Set;
 
 import com.onlineeventmanagement.domain.PackageObj;
+import com.onlineeventmanagement.utilities.JdbcConnector;
 
 
 public class PackageDAOImpl implements PackageDAO {
 
 	@Override
-	public int insertPackage(PackageObj packageObj) throws SQLException {
+	public String insertPackage(PackageObj packageObj) throws SQLException {
 		Connection connection = JdbcConnector.getJdbcConnection();
 		PreparedStatement statement = null;
 		
-		String query = "insert into package(?,?,?,?,?)";
+		String query = "insert into packages(?,?,?,?,?)";
 		statement = connection.prepareStatement(query);
-		statement.setString(1, packageObj.getId());
+		statement.setInt(1, packageObj.getPackageId());
 		statement.setString(2, packageObj.getType());
 		String setValues = String.join(",", packageObj.getServices());
 		statement.setString(3, setValues);
 		statement.setDouble(4, packageObj.getAmount());
-		statement.setString(5, packageObj.getVendor().getId());
+		statement.setInt(5, packageObj.getVendor().getVendorId());
 		
 		int res = statement.executeUpdate();
 		statement.close();
 		connection.close();
 		
-		return res;
+		return (res + " vendor added!");
 	}
 
 	@Override
@@ -43,13 +43,14 @@ public class PackageDAOImpl implements PackageDAO {
 		ResultSet resultSet = null;
 		List<PackageObj> packages = new ArrayList<>();
 		
-		String query = "select * from package";
+		String query = "select * from packages";
 		statement = connection.prepareStatement(query);
 		resultSet = statement.executeQuery();
 		
 		if(resultSet.next())	{
 			PackageObj packageObj = new PackageObj();
-			packageObj.setId(resultSet.getString("package_id"));
+			
+			packageObj.setPackageId(resultSet.getInt("package_id"));
 			packageObj.setType(resultSet.getString("type"));
 
 			Set<String> services = new HashSet<>();
@@ -59,7 +60,9 @@ public class PackageDAOImpl implements PackageDAO {
 			packageObj.setServices(services);
 			
 			packageObj.setAmount(resultSet.getDouble("amount"));
-			//packageObj.setVendor(resultSet.get);
+			
+			VendorDAO vendorDAO = new VendorDAOImpl();
+			packageObj.setVendor(vendorDAO.searchVendor(resultSet.getInt("vendorId")));
 			
 			packages.add(packageObj);
 		}
@@ -68,19 +71,19 @@ public class PackageDAOImpl implements PackageDAO {
 	}
 
 	@Override
-	public PackageObj searhPackage(String id) throws SQLException {
+	public PackageObj searhPackage(int packageId) throws SQLException {
 		Connection connection = JdbcConnector.getJdbcConnection();
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		
-		String query = "select * from package where id=?";
+		String query = "select * from packages where packageId=?";
 		statement = connection.prepareStatement(query);
-		statement.setString(1, id);
+		statement.setInt(1, packageId);
 		resultSet = statement.executeQuery();
 		PackageObj packageObj = new PackageObj();
 		
 		if(resultSet.next())	{
-			packageObj.setId(resultSet.getString("id"));
+			packageObj.setPackageId(resultSet.getInt("id"));
 			packageObj.setType(resultSet.getString("type"));
 			
 			Set<String> services = new HashSet<>();
@@ -90,22 +93,25 @@ public class PackageDAOImpl implements PackageDAO {
 			packageObj.setServices(services);
 			
 			packageObj.setAmount(resultSet.getDouble("amount"));
-			//packageObj.setVendor(resultSet.get);
+			
+			VendorDAO vendorDAO = new VendorDAOImpl();
+			packageObj.setVendor(vendorDAO.searchVendor(resultSet.getInt("vendorId")));
 		}
 		
 		return packageObj;
 	}
 
 	@Override
-	public int deletePackage(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String deletePackage(int packageId) throws SQLException {
+		Connection connection = JdbcConnector.getJdbcConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		String query = "delete from packages where packageId=?";
+		statement = connection.prepareStatement(query);
+		statement.setInt(1, packageId);
+		resultSet = statement.executeQuery();
+		
+		return ("Vendor" + packageId + " deleted!");
 	}
-
-	@Override
-	public int updatePackage(String id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

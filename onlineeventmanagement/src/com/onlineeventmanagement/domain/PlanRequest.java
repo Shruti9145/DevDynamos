@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class PlanRequest {
-	private int id;
+	private int planRequestId;
 	private LocalDate fromDate;
 	private LocalDate toDate;
 	private Set<String> services;
@@ -14,9 +14,9 @@ public class PlanRequest {
 	private PackageObj packageName;
 	private User user;
 	
-	public PlanRequest(int id, LocalDate fromDate, LocalDate toDate, Set<String> services, int numberPeople,
-			Set<String> otherServices, PackageObj packageName, User user) {
-		this.id = id;
+	public PlanRequest() {}
+	
+	public PlanRequest(LocalDate fromDate, LocalDate toDate, Set<String> services, int numberPeople, Set<String> otherServices, PackageObj packageName, User user) {
 		this.fromDate = fromDate;
 		this.toDate = toDate;
 		this.services = services;
@@ -26,11 +26,11 @@ public class PlanRequest {
 		this.user = user;
 	}
 	
-	public int getId() {
-		return id;
+	public int getPlanRequestId() {
+		return planRequestId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setPlanRequestId(int planRequestId) {
+		this.planRequestId = planRequestId;
 	}
 	
 	public LocalDate getFromDate() {
@@ -81,12 +81,12 @@ public class PlanRequest {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(planRequestId);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,13 +96,11 @@ public class PlanRequest {
 		if (getClass() != obj.getClass())
 			return false;
 		PlanRequest other = (PlanRequest) obj;
-		return id == other.id;
+		return planRequestId == other.planRequestId;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "PlanRequest [id=" + id + ", fromDate=" + fromDate + ", toDate=" + toDate + ", services=" + services
-				+ ", numberPeople=" + numberPeople + ", otherServices=" + otherServices + ", packageName=" + packageName
-				+ "]";
+		return "PlanRequest [planRequestId=" + planRequestId + ", fromDate=" + fromDate + ", toDate=" + toDate + ", services=" + services + ", numberPeople=" + numberPeople + ", otherServices=" + otherServices + ", packageName=" + packageName + ", user=" + user + "]";
 	}
 }

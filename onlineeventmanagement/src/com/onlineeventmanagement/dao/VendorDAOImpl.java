@@ -1,17 +1,21 @@
 package com.onlineeventmanagement.dao;
-package com.onlineeventmanagement.domain;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import com.onlineeventmanagement.domain.PackageObj;
 import com.onlineeventmanagement.domain.Quotation;
 import com.onlineeventmanagement.domain.Vendor;
 import com.onlineeventmanagement.exception.UserLoginException;
 import com.onlineeventmanagement.exception.VendorLoginException;
+import com.onlineeventmanagement.utilities.JdbcConnector;
 
 public class VendorDAOImpl implements VendorDAO{
 
@@ -90,7 +94,88 @@ public class VendorDAOImpl implements VendorDAO{
 		return false;
 
 	}
-
+	
+	public String insertVendor(Vendor vendor) throws SQLException	{
+		Connection connection = JdbcConnector.getJdbcConnection();
+		PreparedStatement statement = null;
+		
+		String query = "insert into vendors(?,?,?,?,?,?)";
+		statement = connection.prepareStatement(query);
+		statement.setString(1, vendor.getName());
+		statement.setString(2, vendor.getAddress());
+		statement.setString(3, vendor.getEmail());
+		statement.setString(4, vendor.getContactNo());
+		statement.setString(5, vendor.getUsername());
+		statement.setString(6, vendor.getPassword());
+		
+		int res = statement.executeUpdate();
+		statement.close();
+		connection.close();
+		
+		return (res + " vendor added!");
 	}
-
+	
+	public List<Vendor> searchVendors() throws SQLException	{
+		Connection connection = JdbcConnector.getJdbcConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Vendor> vendors = new ArrayList<>();
+		
+		String query = "select * from vendors";
+		statement = connection.prepareStatement(query);
+		resultSet = statement.executeQuery();
+		
+		if(resultSet.next())	{
+			Vendor vendor = new Vendor();
+			
+			vendor.setVendorId(resultSet.getInt("vendorId"));
+			vendor.setName(resultSet.getString("name"));
+			vendor.setAddress(resultSet.getString("address"));
+			vendor.setEmail(resultSet.getString("email"));
+			vendor.setContactNo(resultSet.getString("contactNumber"));
+			vendor.setUsername(resultSet.getString("username"));
+			vendor.setPassword(resultSet.getString("password"));
+			
+			vendors.add(vendor);
+		}
+		
+		return vendors;
+	}
+	
+	public Vendor searchVendor(int vendorId) throws SQLException	{
+		Connection connection = JdbcConnector.getJdbcConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Vendor vendor = new Vendor();
+		
+		String query = "select * from vendors where vendorId=?";
+		statement = connection.prepareStatement(query);
+		statement.setInt(1, vendorId);
+		resultSet = statement.executeQuery();
+		
+		if(resultSet.next())	{
+			vendor.setVendorId(resultSet.getInt("vendorId"));
+			vendor.setName(resultSet.getString("name"));
+			vendor.setAddress(resultSet.getString("address"));
+			vendor.setEmail(resultSet.getString("email"));
+			vendor.setContactNo(resultSet.getString("contactNumber"));			
+			vendor.setUsername(resultSet.getString("username"));
+			vendor.setPassword(resultSet.getString("password"));
+		}
+		
+		return vendor;
+	}
+	
+	public String deleteVendor(int vendorId) throws SQLException	{
+		Connection connection = JdbcConnector.getJdbcConnection();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		String query = "delete from vendors where vendorId=?";
+		statement = connection.prepareStatement(query);
+		statement.setInt(1, vendorId);
+		resultSet = statement.executeQuery();
+		
+		return ("Vendor" + vendorId + " deleted!");
+	}
 }

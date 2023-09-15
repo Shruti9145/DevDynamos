@@ -1,7 +1,12 @@
 package com.onlineeventmanagement.service;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
+import com.onlineeventmanagement.domain.PackageObj;
+import com.onlineeventmanagement.domain.PlanRequest;
 import com.onlineeventmanagement.domain.Quotation;
 import com.onlineeventmanagement.domain.User;
 import com.onlineeventmanagement.exception.UserLoginException;
@@ -34,16 +39,16 @@ public interface UserService {
      * Method viewPackage will get the package details from Package table in DB.
      * Packages will be stored by Vendor in Package table.
      */
-    public void viewPackage();
+    public List<PackageObj> viewPackage() throws SQLException;
 
     /*User will Select the package */
-    public String selectPackage(String packageName);
+    public PlanRequest selectPackage(int packageId, LocalDate fromDate, LocalDate toDate, int numberPeople, Set<String> otherServices, User user) throws SQLException;
     
     public boolean setQuotationStatus(String userName,int quotationId,String status);
 
 	boolean updateEmail(User user, String email) throws UserNotFoundException, UserNotLoginException;
 
-	public List<Quotation> showAllQuotations(String userName);
+	public List<Quotation> showAllQuotations(int userId) throws SQLException, UserNotFoundException;
 
 	
 

@@ -225,7 +225,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			User user = new User();
 			while (res.next()) {
-				user.setUserId(res.getString("userId"));
+				user.setUserId(res.getInt("userId"));
 				user.setPassword(res.getString("password"));
 				user.setName(res.getString("name"));
 				user.setUserName(res.getString("userName"));
@@ -397,7 +397,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			User user = new User();
 			while (res.next()) {
-				user.setUserId(res.getString("userId"));
+				user.setUserId(res.getInt("userId"));
 				user.setPassword(res.getString("password"));
 				user.setName(res.getString("name"));
 				user.setUserName(res.getString("userName"));
@@ -446,7 +446,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			while (res.next()) {
 				Quotation quotation = new Quotation();
-				quotation.setId(res.getInt("quotation_id"));
+				quotation.setUserId(res.getInt("quotation_id"));
 				quotation.setEstimatedAmmount(res.getDouble("estimated_amount"));
 				quotation.setPlanRequestId(res.getInt("plan_request_id"));
 				System.out.println("Dao id=  "+res.getInt("user_id"));
