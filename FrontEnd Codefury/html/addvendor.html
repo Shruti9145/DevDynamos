@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vendor</title>
+    <link rel="stylesheet" href="/css/addvendor.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Add Vendor</h1>
+        <form id="vendorForm" action="" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="contact">Contact Number:</label>
+            <input type="text" id="contact" name="contact" required>
+
+            <input type="submit" value="Add Vendor">
+        </form>
+        <div class="message" id="successMessage">Vendor added successfully!</div>
+    </div>
+
+    <script>
+        // JavaScript to show success message when form is submitted
+        const vendorForm = document.getElementById('vendorForm');
+        const successMessage = document.getElementById('successMessage');
+
+        vendorForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            setTimeout(() => {
+                successMessage.style.display = 'block';
+            }, 1000); // You can adjust the timeout as needed
+        });
+    </script>
+</body>
+
+</html>

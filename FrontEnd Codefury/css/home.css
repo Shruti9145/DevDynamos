@@ -1,0 +1,263 @@
+/* project home page css */
+
+/* navbar and menu */
+#navbar {
+    background-color: #333;
+    position: fixed;
+    top: -50px;
+    width: 100%;
+    display: block;
+    transition: top 0.3s;
+    z-index: 300;
+  }
+  
+  #navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 30px;
+    text-decoration: none;
+    font-size: 17px;
+   
+  }
+  
+  #navbar a:hover {
+    color: #bd7a7a;
+    
+  }
+
+.bg-img{
+    max-width: 1500px;
+    width: 100%;
+    min-height: 550px !important;
+   height: 100%;
+   object-fit: cover;
+   position: relative;
+}
+.menu-but{
+    position: absolute;
+    z-index: 100;
+    top: 10%;
+    right: 100px;
+    border-radius: 50% !important;
+    opacity: 0.8;
+    background-color: rgb(62, 63, 62) !important;
+}
+
+.offcanvas{
+    height: 100% !important;
+    background-color: rgb(238, 161, 174) !important;
+    padding-top: 20%;
+}
+.links{
+    text-decoration: none;
+    color: rgb(92, 86, 86);
+    font-size: 2rem;
+  
+}
+.links:hover{
+    color:rgb(36, 27, 30);
+}
+
+/* infinite bar */
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+   }
+    100% {
+        transform: translateX(calc(-250px * 7));
+   }
+}
+.slider {
+    background: white;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+    height: 100px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+}
+.slider::before, .slider::after {
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    content: "";
+    height: 100px;
+    position: absolute;
+    width: 100px;
+    z-index: 2;
+}
+.slider::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+}
+.slider::before {
+    left: 0;
+    top: 0;
+}
+.slider .slide-track {
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: calc(250px * 14);
+}
+.slider .slide {
+    height: 100px;
+    width: 250px;
+}
+
+
+/* comments */
+section{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wrapper .outer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wrapper .card{
+    background: #fff;
+    max-width: 430px;
+    width:100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    justify-content: space-between;
+    border-radius: 100px 20px 20px 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation: animate 15s linear infinite;
+    animation-delay: calc(3s * var(--delay));
+  }
+  .outer:hover .card{
+    animation-play-state: paused;
+  }
+  .wrapper .card:last-child{
+    animation-delay: calc(-3s * var(--delay));
+  }
+  @keyframes animate {
+    0%{
+      opacity: 0;
+      transform: translateY(100%) scale(0.5);
+    }
+    5%, 20%{
+      opacity: 0.4;
+      transform: translateY(100%) scale(0.7);
+    }
+    25%, 40%{
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0%) scale(1);
+    }
+    45%, 60%{
+      opacity: 0.4;
+      transform: translateY(-100%) scale(0.7);
+    }
+    65%, 100%{
+      opacity: 0;
+      transform: translateY(-100%) scale(0.5);
+    }
+  }
+  .card .content{
+    display: flex;
+    align-items: center;
+  }
+  .wrapper .card .img{
+    height: 90px;
+    width: 90px;
+    position: absolute;
+    left: 15px;
+    top: 20px !important;
+    background: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    background: #12192c;
+  }
+  .card .img img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .card .details{
+    margin-left: 80px;
+  }
+  .details span{
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .card a{
+    text-decoration: none;
+    padding: 7px 18px;
+    margin-left: 65px;
+    border-radius: 25px;
+    color: #fff;
+    background: #12192c;
+    transition: all 0.3s ease;
+  }
+  .card a:hover{
+    transform: scale(0.94);
+  }
+
+  /* contact us */
+  #con-email{
+    border-bottom: 1px solid black !important;
+    border: none;
+  }
+
+  /* footer */
+
+  .logos, .arrow{
+    color: rgb(206, 107, 124);
+    font-size: 30px;
+  }
+  .logos:hover{
+    color:white;
+  }
+  footer{
+    background-color: black;
+    opacity: 0.9;
+  }
+  .address{
+    color: white;
+  }
+
+  /* team */
+
+  .team{
+   background-image: url("/images/pexels-romka-\ -2065650.jpg");
+   object-fit: cover;
+  }
+  .circle{
+    max-width: 400px;
+    width: 100%;
+    height: 400px;
+    background: transparent 0% 0% no-repeat padding-box;
+    box-shadow: 0px 4px 31px #0000000A;
+    border: 20px solid #FFFFFF;
+    opacity: 1;
+    background-color: #FAFAFA;
+    text-align: center;
+    padding-top: 20%;
+  }
+  .team-display{
+    background-color: white;
+    max-width: 500px;
+    width:100%;
+    max-height: 400px;
+    height: 100%;
+    overflow: scroll;
+  }
+  .team-card{
+    border: 1px solid black !important;
+    border-radius: 10%;
+  }
