@@ -1,0 +1,95 @@
+<!-- vendor login page -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- main css link of the page -->
+  <link rel="stylesheet" href="/css/login.css">
+
+  <!-- bootstrap css link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <title>Vendor Login</title>
+</head>
+
+<body>
+  <!-- image carousel for background -->
+  <div class="bg-image">
+    <div class="carsoual">
+      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel"
+        data-bs-interval="5000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="bg-img" style="width: 100%; height: 650px;"
+              src="/images/close-up-restaurant-table-with-pink-velvet-chairs-grey-painted-hall-with-classic-paintings.jpg"
+              class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img class="bg-img" style="width: 100%; height: 650px;"
+              src="/images/sparkling-glassware-stands-long-table-prepared-wedding-di.jpg" class="d-block w-100"
+              alt="...">
+          </div>
+          <div class="carousel-item">
+            <img class="bg-img" style=" width:100%; height: 650px;"
+              src="/images/luxurious-dinner-hall-with-large-crystal-chandelier.jpg" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true" hidden></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true" hidden></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- main content -->
+    <div class="form-align">
+      <div class="form-box">
+        <div class="user-text">
+          <label>Vendor Login</label>
+        </div>
+
+        <!-- vendor login form -->
+        <form method="post">
+          <div>
+            <span id="invalid-msg" style="color: red;"></span>
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Vendor Name <span style="color: red;">*</span></label>
+            <input type="text" class="form-control" name="name" id="vname" aria-describedby="emailHelp">
+            <span id="name-msg" style="color: red;"></span>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password <span style="color: red;">*</span></label>
+            <input type="password" class="form-control" name="password" id="vpassword">
+            <span id="password-msg" style="color: red;"></span>
+          </div>
+          <div class="but-pos">
+            <button type="submit" onclick="vcheck(event);" class="btn btn-link sub-but">Submit</button>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <!-- bootstrap js link -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <!-- js file of the pagee -->
+  <script src="vendorlogin.js"></script>
+</body>
+
+</html>

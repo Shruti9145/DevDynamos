@@ -1,0 +1,43 @@
+{
+    "users":[
+    {
+        "UserId":"1",
+        "Username":"john", 
+        "Password":"john123",       
+        "FullName": "John Doe", 
+        "DOJ":"2023-05-07",
+        "DOB":"1996-06-02", 
+        "Department":"IT",
+        "Mobile": "9485736253",
+        "Email":"john@gmail.com",
+        "Location": "D-303, B-wing, Phoenix Appartment, 150 ft. Ring Road, Pune", 
+        "Status":"active"
+    },
+    {
+        "UserId":"2",
+        "Username":"mike", 
+        "Password":"mike234",       
+        "FullName": "Mike Donohue", 
+        "DOJ":"2023-07-04",
+        "DOB":"1996-02-08", 
+        "Department":"Sales",
+        "Mobile": "9485738475",
+        "Email":"mike@gmail.com",
+        "Location": "A-11, C-wing, Sunflower Appartment, Dhanori, Pune", 
+        "Status":"active"
+    },
+    {
+        "UserId":"2",
+        "Username":"sam", 
+        "Password":"sam67",       
+        "FullName": "Sam Elish", 
+        "DOJ":"2023-09-03",
+        "DOB":"1996-11-12", 
+        "Department":"Marketing",
+        "Mobile": "9793845729",
+        "Email":"sam@gmail.com",
+        "Location": "5-A, Kailash, Suryanagar Society, Vimanagar, Pune", 
+        "Status":"inactive"
+    }
+]
+}

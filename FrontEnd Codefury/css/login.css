@@ -1,0 +1,48 @@
+/* login pages css file */
+.bg-img{
+    opacity: 0.6;   
+}
+
+.bg-image{
+    position: relative;
+}
+.form-align{
+    max-width: 450px !important;
+    width: 100%;
+     border: 1px solid black;
+     background-color: black  !important;
+     opacity: 0.7 !important;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+.form-box{
+    background-color: rgb(15, 14, 14);
+   opacity: 1 !important;
+   padding: 40px 20px;
+   border-radius: 10px;
+   color: white;
+   
+}
+.sub-but{
+    padding: 10px 25px !important;
+     color: white !important;
+     text-decoration: none !important;
+     background-color: black !important;
+     border-color: white !important;  
+}
+.but-pos{
+    margin-top: 40px;
+    text-align: center;
+}
+.user-text{
+    padding-bottom: 20px;
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    font-weight:500;
+   ;
+}

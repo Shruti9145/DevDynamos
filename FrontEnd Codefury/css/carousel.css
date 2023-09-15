@@ -1,0 +1,77 @@
+/* caraousel css of home circular rotating cards  */
+
+.slider-card{
+    background-color: #eb8b97;
+}
+  .carousel-circle {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    perspective: 100rem;
+  }
+  .carousel__cards {
+    position: relative;
+    width: 20rem;
+    height: 50rem;
+    transform-style: preserve-3d;
+    transform: translateZ(-25rem);
+    transition: transform 0.3s ease-in;
+  }
+  .carousel__img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+  .carousel__card {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border: 2px solid white;
+    border-radius: 0.2rem;
+    background-color: #f7f5f5;
+  }
+  .carousel__card:nth-child(1) {
+    transform: rotateY(0deg) translateZ(25rem);
+  }
+  .carousel__card:nth-child(2) {
+    transform: rotateY(45deg) translateZ(25rem);
+  }
+  .carousel__card:nth-child(3) {
+    transform: rotateY(90deg) translateZ(25rem);
+  }
+  .carousel__card:nth-child(4) {
+    transform: rotateY(135deg) translateZ(25rem);
+  }
+  .carousel__card:nth-child(5) {
+    transform: rotateY(180deg) translateZ(25rem);
+  }
+  .carousel__card:nth-child(6) {
+    transform: rotateY(225deg) translateZ(25rem);
+  }
+  .carousel__card:nth-child(7) {
+    transform: rotateY(270deg) translateZ(25rem);
+  }
+  .carousel__card:nth-child(8) {
+    transform: rotateY(315deg) translateZ(25rem);
+  }
+  .carousel__btn {
+    outline: none;
+    border: none;
+    border-radius: 0.2rem;
+    background: #353132;
+    padding: 0.5em 1em;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #f7e9e9;
+    cursor: pointer;
+    margin: 0 2rem;
+    margin-top: 20px;
+  }
+  .carousel__btn:hover {
+    transform: scale(1.04);
+    background: #000000;
+  }
+   

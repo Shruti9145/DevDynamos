@@ -1,0 +1,117 @@
+/* common css file for most pages */
+
+/* user home page */
+.welcome{
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    font-size: 58px;
+}
+
+body{
+    background-image: url("../images/WhatsApp\ Image\ 2023-09-14\ at\ 4.50.49\ PM.jpeg");
+    height: 100%;
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+   
+
+}
+#profile{
+    border-radius: 50px;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.menu-icon{
+    width: 50px;
+}
+
+#mySidebar{
+    width: 35% !important;
+    background-color: black;
+    opacity: 0.7;
+    color: white !important;
+}
+
+.side-link{
+    color: white; 
+    text-decoration: none;
+}
+
+.navbar-layout{
+    background-color: black;
+    opacity: 0.7;
+    z-index: 5;
+} 
+
+ .links{
+    color: white !important;
+} 
+
+.main{
+    z-index: 100;
+}
+.profile-form{
+    background-color: rgb(85, 75, 75);
+    opacity: 0.8;
+    border: 1px solid black;
+    border-radius: 1%;
+    color: rgb(245, 238, 238);
+}
+.sub-but{
+    padding: 10px 25px !important;
+     color: rgb(7, 6, 6) !important;
+     text-decoration: none !important;
+     background-image: linear-gradient(to bottom right, rgb(245, 241, 241), rgb(248, 49, 125));
+     border-color: white !important;  
+}
+.submit-button{
+    text-align: center;
+}
+
+/*view quotation*/
+
+.pagination{
+  --bs-pagination-color: black !important;
+}
+
+.page-item.active .page-link {
+    background-color: #fd0dd76e !important;
+    border-color: black !important;
+}
+
+.accept:active, .accept:focus, .decline:active, .decline:focus{
+     outline: none !important;
+}
+.btn-link{
+    text-decoration: none !important;
+    --bs-btn-color: white !important;
+}
+
+.table{
+    opacity: 0.8 !important;
+--bs-table-bg: rgb(85, 75, 75) !important;
+--bs-table-striped-color: white !important;
+--bs-table-color: white !important;
+}
+
+
+/* change password input style */
+.inp-style{
+    background-color: rgb(85, 75, 75);
+    opacity: 0.8;
+    border: none;
+    border-bottom: 3px solid rgb(245, 242, 242) !important;
+}
+
+/* footer */
+
+footer{
+    background-color: black;
+    color: white;
+    opacity: 0.7;
+    bottom: 0%;
+    width: 100%;
+    position: fixed;
+}

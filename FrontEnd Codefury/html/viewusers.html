@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View User Registrations</title>
+    <link rel="stylesheet" href="/css/viewusers.css">
+</head>
+<body>
+    <div class="container">
+        <h1>View User Registrations</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Password</th>
+                    <th>Date Of Birth</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Login Status</th>
+                    <th>User Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dummy Data -->
+                <tr>
+                    <td>10</td>
+                    <td>john_doe</td>
+                    <td>john doe</td>
+                    <td>password123</td>
+                    <td>1990-05-15</td>
+                    <td>9594046574</td>
+                    <td>john.doe@gmail.com</td>
+                    <td>Pune</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>
+                        <button class="action-button activate-button" data-user="john_doe">Activate</button>
+                        <button class="action-button deactivate-button" data-user="john_doe">Deactivate</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Jane_Sm1</td>
+                    <td>Jane Smith</td>
+                    <td>pass@1234#</td>
+                    <td>2019-05-12</td>
+                    <td>8976543790</td>
+                    <td>jane_smith@gmail.com</td>
+                    <td>London</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>
+                        <button class="action-button activate-button" data-user="Jane_Sm1">Activate</button>
+                        <button class="action-button deactivate-button" data-user="Jane_Sm1">Deactivate</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Tony_S</td>
+                    <td>Tony s</td>
+                    <td>Pass_123</td>
+                    <td>1990-06-14</td>
+                    <td>7859568547</td>
+                    <td>tony@gmail.com</td>
+                    <td>Pune</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>
+                        <button class="action-button activate-button" data-user="Tony_S">Activate</button>
+                        <button class="action-button deactivate-button" data-user="Tony_S">Deactivate</button>
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // JavaScript to handle user activation and deactivation
+        const activateButtons = document.querySelectorAll('.activate-button');
+        const deactivateButtons = document.querySelectorAll('.deactivate-button');
+
+        function showMessage(username, action) {
+            alert(`${action} user: ${username}`);
+        }
+
+        activateButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const username = button.getAttribute('data-user');
+                showMessage(username, 'Activate');
+            });
+        });
+
+        deactivateButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const username = button.getAttribute('data-user');
+                showMessage(username, 'Deactivate');
+            });
+        });
+    </script>
+</body>
+</html>
